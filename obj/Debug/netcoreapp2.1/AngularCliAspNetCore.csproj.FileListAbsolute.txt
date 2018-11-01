@@ -1,0 +1,14 @@
+d:\Development\Applications\AngularCliAspNetCore\bin\Debug\netcoreapp2.1\AngularCliAspNetCore.deps.json
+d:\Development\Applications\AngularCliAspNetCore\bin\Debug\netcoreapp2.1\AngularCliAspNetCore.runtimeconfig.json
+d:\Development\Applications\AngularCliAspNetCore\bin\Debug\netcoreapp2.1\AngularCliAspNetCore.runtimeconfig.dev.json
+d:\Development\Applications\AngularCliAspNetCore\bin\Debug\netcoreapp2.1\AngularCliAspNetCore.dll
+d:\Development\Applications\AngularCliAspNetCore\bin\Debug\netcoreapp2.1\AngularCliAspNetCore.pdb
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.csprojAssemblyReference.cache
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.csproj.CoreCompileInputs.cache
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.RazorAssemblyInfo.cache
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.RazorAssemblyInfo.cs
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.AssemblyInfoInputs.cache
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.AssemblyInfo.cs
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.RazorTargetAssemblyInfo.cache
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.dll
+d:\Development\Applications\AngularCliAspNetCore\obj\Debug\netcoreapp2.1\AngularCliAspNetCore.pdb

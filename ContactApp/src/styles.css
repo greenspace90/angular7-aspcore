@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+table {
+    width:100%;
+    border:"0";
+  }
+
+.mat-raised-button {
+    padding: 0 13px !important;
+    margin: 5px !important;
+}
