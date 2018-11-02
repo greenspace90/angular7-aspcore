@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AngularCliAspNetCore": {
+    "angular7_aspcore": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AngularCliAspNetCore.csproj"
+                "${workspaceFolder}/angular7_aspcore.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

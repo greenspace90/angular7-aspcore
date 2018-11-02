@@ -1,10 +1,10 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AngularCliAspNetCore.Models
+namespace angular7_aspcore.Models
 {
     public class Contact {  
-        public long ? id {  
+        public long ? ContactId {  
             get;  
             set;  
         }  

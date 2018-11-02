@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AngularCliAspNetCore.Controllers
+namespace angular7_aspcore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AngularCliAspNetCore.Models;
+using angular7_aspcore.Models;
 
 namespace contact_app.Controllers
 {
@@ -27,7 +27,7 @@ namespace contact_app.Controllers
         [Route("getContact")]  
         public IActionResult GetById(long id) {  
                 // filter contact records by contact id  
-                var item = _context.Contact.FirstOrDefault(t => t.id == id);  
+                var item = _context.Contact.FirstOrDefault(t => t.ContactId == id);  
                 if (item == null) {  
                     return NotFound();  
                 }  
@@ -62,7 +62,7 @@ namespace contact_app.Controllers
                 if (item == null || id == 0) {  
                     return BadRequest();  
                 }  
-                var contact = _context.Contact.FirstOrDefault(t => t.id == id);  
+                var contact = _context.Contact.FirstOrDefault(t => t.ContactId == id);  
                 if (contact == null) {  
                     return NotFound();  
                 }  
@@ -82,7 +82,7 @@ namespace contact_app.Controllers
         [HttpDelete("{id}")]  
         [Route("deleteContact")]  
         public IActionResult Delete(long id) {  
-            var contact = _context.Contact.FirstOrDefault(t => t.id == id);  
+            var contact = _context.Contact.FirstOrDefault(t => t.ContactId == id);  
             if (contact == null) {  
                 return NotFound();  
             }  
