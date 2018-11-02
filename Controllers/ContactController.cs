@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AngularCliAspNetCore.Models;
+using angular7_aspcore.Models;
 
 namespace contact_app.Controllers
 {
@@ -20,14 +20,14 @@ namespace contact_app.Controllers
         [Route("getAllContacts")]  
         public IEnumerable < Contact > GetAll() {  
                 // fetch all contact records  
-                return _context.Contact.ToList();  
+                return _context.Contacts.ToList();  
             }
 
         [HttpGet("{id}")]  
         [Route("getContact")]  
         public IActionResult GetById(long id) {  
                 // filter contact records by contact id  
-                var item = _context.Contact.FirstOrDefault(t => t.id == id);  
+                var item = _context.Contacts.FirstOrDefault(t => t.ContactId == id);  
                 if (item == null) {  
                     return NotFound();  
                 }  
@@ -41,7 +41,7 @@ namespace contact_app.Controllers
                 if (item == null) {  
                     return BadRequest();  
                 }  
-                _context.Contact.Add(new Contact {  
+                _context.Contacts.Add(new Contact {  
                     name = item.name,  
                         email = item.email,  
                         gender = item.gender,  
@@ -62,7 +62,7 @@ namespace contact_app.Controllers
                 if (item == null || id == 0) {  
                     return BadRequest();  
                 }  
-                var contact = _context.Contact.FirstOrDefault(t => t.id == id);  
+                var contact = _context.Contacts.FirstOrDefault(t => t.ContactId == id);  
                 if (contact == null) {  
                     return NotFound();  
                 }  
@@ -72,7 +72,7 @@ namespace contact_app.Controllers
                 contact.birth = item.birth;  
                 contact.techno = item.techno;  
                 contact.message = item.message;  
-                _context.Contact.Update(contact);  
+                _context.Contacts.Update(contact);  
                 _context.SaveChanges();  
                 return Ok(new {  
                     message = "Contact is updated successfully."  
@@ -82,11 +82,11 @@ namespace contact_app.Controllers
         [HttpDelete("{id}")]  
         [Route("deleteContact")]  
         public IActionResult Delete(long id) {  
-            var contact = _context.Contact.FirstOrDefault(t => t.id == id);  
+            var contact = _context.Contacts.FirstOrDefault(t => t.ContactId == id);  
             if (contact == null) {  
                 return NotFound();  
             }  
-            _context.Contact.Remove(contact);  
+            _context.Contacts.Remove(contact);  
             _context.SaveChanges();  
             return Ok(new {  
                 message = "Contact is deleted successfully."  

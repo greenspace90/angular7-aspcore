@@ -12,10 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using AngularCliAspNetCore.Models;
+using angular7_aspcore.Models;
 using System.IO;
 
-namespace AngularCliAspNetCore
+namespace angular7_aspcore
 {
     public class Startup
     {

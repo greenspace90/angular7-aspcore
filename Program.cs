@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace AngularCliAspNetCore
+namespace angular7_aspcore
 {
     public class Program
     {
