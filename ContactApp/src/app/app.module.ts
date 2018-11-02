@@ -1,26 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Routing } from './app.routing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { AppMaterialModule } from './app.material.module';
-import { ContactformComponent } from './contactform/contactform.component';
-import { ContactlistComponent } from './contactlist/contactlist.component';
+import { AppMaterialModule } from './modules/app.material.module';
+import { ContactformComponent } from './components/contactform/contactform.component';
+import { ContactlistComponent } from './components/contactlist/contactlist.component';
+import { VehiclelistComponent } from './components/vehiclelist/vehiclelist.component';
 import { ContactService } from './services/contact.service';
+import { VehicleService } from './services/vehicle.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactformComponent,
-    ContactlistComponent
+    ContactlistComponent,
+    VehiclelistComponent
   ],
   imports: [
     BrowserModule,
-    // AppRoutingModule,
     BrowserAnimationsModule,    
     HttpClientModule,
     AppMaterialModule,
@@ -29,7 +30,10 @@ import { ContactService } from './services/contact.service';
     LayoutModule,
     Routing
   ],
-  providers: [ContactService],
+  providers: [
+    ContactService,
+    VehicleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

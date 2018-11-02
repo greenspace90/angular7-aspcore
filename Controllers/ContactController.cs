@@ -4,16 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using angular7_aspcore.Models;
+using DTO = angular7_aspcore.Models.DTOs;
+using AutoMapper;
 
 namespace contact_app.Controllers
 {
     // set route attribute to make request as 'api/contact'  
     [Route("api/[controller]")]  
     public class ContactController: Controller {  
-        private readonly ContactAppContext _context;  
+        private readonly ContactAppContext _context; 
+        private readonly IMapper _mapper; 
         // initiate database context  
-        public ContactController(ContactAppContext context) {  
-                _context = context;  
+        public ContactController(ContactAppContext context, IMapper mapper) {  
+                _context = context;
+                _mapper = mapper;  
             }
 
         [HttpGet]  
@@ -36,24 +40,40 @@ namespace contact_app.Controllers
 
         [HttpPost]  
         [Route("addContact")]  
-        public IActionResult Create([FromBody] Contact item) {  
+        public IActionResult Create([FromBody] DTO.Contact item) {  
                 // set bad request if contact data is not provided in body  
                 if (item == null) {  
                     return BadRequest();  
-                }  
-                _context.Contacts.Add(new Contact {  
-                    name = item.name,  
-                        email = item.email,  
-                        gender = item.gender,  
-                        birth = item.birth,  
-                        techno = item.techno,  
-                        message = item.message  
-                });  
+                }
+
+                _context.Contacts.Add(_mapper.Map<Contact>(item));
                 _context.SaveChanges();  
                 return Ok(new {  
                     message = "Contact is added successfully."  
                 });  
             }
+
+        // [HttpPost]  
+        // [Route("addContact")]  
+        // public IActionResult Create([FromBody] Contact item) {  
+        //         // set bad request if contact data is not provided in body  
+        //         if (item == null) {  
+        //             return BadRequest();  
+        //         }
+
+        //         _context.Contacts.Add(new Contact {  
+        //             name = item.name,  
+        //                 email = item.email,  
+        //                 gender = item.gender,  
+        //                 birth = item.birth,  
+        //                 techno = item.techno,  
+        //                 message = item.message  
+        //         });  
+        //         _context.SaveChanges();  
+        //         return Ok(new {  
+        //             message = "Contact is added successfully."  
+        //         });  
+        //     }
 
         [HttpPut("{id}")]  
         [Route("updateContact")]  
