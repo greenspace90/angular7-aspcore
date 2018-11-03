@@ -1,3 +1,6 @@
+import { IContact } from '@app/model/contact';
+import { IBodystyle } from '@app/model/bodystyle';
+
 export interface IVehicle {
     vehicleid: number;
     name: string;
@@ -5,5 +8,7 @@ export interface IVehicle {
     model: string;
     version: string;
     contactid: number;
+    contact: IContact,
     typeid: number;
+    bodystyle: IBodystyle
 }
