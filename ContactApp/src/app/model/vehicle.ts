@@ -8,7 +8,5 @@ export interface IVehicle {
     model: string;
     version: string;
     contactid: number;
-    contact: IContact,
     typeid: number;
-    bodystyle: IBodystyle
 }

@@ -25,6 +25,17 @@ namespace contact_app.Controllers
             }
 
         [HttpGet("{id}")]  
+        [Route("getVehiclesByContactId")]  
+        public IEnumerable < Vehicle > GetByContactId(long id) {  
+              // filter vehicle records by vehicle id  
+                var items = _context.Vehicles.Where(t => t.ContactId == id).ToList();  
+                // if (items == null) {  
+                //     return NotFound();  
+                // }  
+                return items;    
+            }
+
+        [HttpGet("{id}")]  
         [Route("getVehicle")]  
         public IActionResult GetById(long id) {  
                 // filter vehicle records by vehicle id  

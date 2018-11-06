@@ -10,15 +10,18 @@ import { AppMaterialModule } from './modules/app.material.module';
 import { ContactformComponent } from './components/contactform/contactform.component';
 import { ContactlistComponent } from './components/contactlist/contactlist.component';
 import { VehiclelistComponent } from './components/vehiclelist/vehiclelist.component';
+import { VehicleformComponent } from './components/vehicleform/vehicleform.component';
 import { ContactService } from './services/contact.service';
 import { VehicleService } from './services/vehicle.service';
+import { BodystyleService } from './services/bodystyle.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactformComponent,
     ContactlistComponent,
-    VehiclelistComponent
+    VehiclelistComponent,
+    VehicleformComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { VehicleService } from './services/vehicle.service';
   ],
   providers: [
     ContactService,
-    VehicleService
+    VehicleService,
+    BodystyleService
   ],
   bootstrap: [AppComponent]
 })
