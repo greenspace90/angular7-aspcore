@@ -84,18 +84,18 @@ export class ContactlistComponent implements OnInit {
     this.modalBtnTitle = 'Add';
     this.openDialog();
   }
-  editContact(id: number) {
+  editContact(contactId: number) {
     this.dbops = DBOperation.update;
     this.modalTitle = 'Edit Contact';
     this.modalBtnTitle = 'Update';
-    this.contact = this.dataSource.data.filter(x => x.contactid === id)[0];
+    this.contact = this.dataSource.data.filter(x => x.contactId === contactId)[0];
     this.openDialog();
   }
-  deleteContact(id: number) {
+  deleteContact(ContactId: number) {
     this.dbops = DBOperation.delete;
     this.modalTitle = 'Confirm to Delete ?';
     this.modalBtnTitle = 'Delete';
-    this.contact = this.dataSource.data.filter(x => x.contactid === id)[0];
+    this.contact = this.dataSource.data.filter(x => x.contactId === ContactId)[0];
     this.openDialog();
   }
   showMessage(msg: string) {

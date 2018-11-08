@@ -28,7 +28,7 @@ namespace contact_app.Controllers
         [Route("getBodystyle")]  
         public IActionResult GetById(long id) {  
                 // filter bodystyle records by vehicle id  
-                var item = _context.Bodystyles.FirstOrDefault(t => t.TypeId == id);  
+                var item = _context.Bodystyles.FirstOrDefault(t => t.typeId == id);  
                 if (item == null) {  
                     return NotFound();  
                 }  
@@ -43,8 +43,8 @@ namespace contact_app.Controllers
                     return BadRequest();  
                 }  
                 _context.Bodystyles.Add(new Bodystyle {  
-                    TypeId = item.TypeId,
-                    Name = item.Name
+                    typeId = item.typeId,
+                    name = item.name
                 });  
                 _context.SaveChanges();  
                 return Ok(new {  
@@ -59,12 +59,12 @@ namespace contact_app.Controllers
                 if (item == null || id == 0) {  
                     return BadRequest();  
                 }  
-                var bodystyle = _context.Bodystyles.FirstOrDefault(t => t.TypeId == id);  
+                var bodystyle = _context.Bodystyles.FirstOrDefault(t => t.typeId == id);  
                 if (bodystyle == null) {  
                     return NotFound();  
                 }  
-                bodystyle.TypeId = item.TypeId;
-                bodystyle.Name = item.Name;  
+                bodystyle.typeId = item.typeId;
+                bodystyle.name = item.name;  
                 _context.Bodystyles.Update(bodystyle);  
                 _context.SaveChanges();  
                 return Ok(new {  
@@ -75,7 +75,7 @@ namespace contact_app.Controllers
         [HttpDelete("{id}")]  
         [Route("deleteBodystyle")]  
         public IActionResult Delete(long id) {  
-            var bodystyle = _context.Bodystyles.FirstOrDefault(t => t.TypeId == id);  
+            var bodystyle = _context.Bodystyles.FirstOrDefault(t => t.typeId == id);  
             if (bodystyle == null) {  
                 return NotFound();  
             }  

@@ -38,7 +38,7 @@ export class ContactformComponent implements OnInit {
   ngOnInit() {
     // built contact form
     this.contactFrm = this.fb.group({
-      contactid: [''],
+      contactId: [''],
       name: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
       gender: ['', [Validators.required]],
@@ -133,7 +133,7 @@ export class ContactformComponent implements OnInit {
         );
         break;
       case DBOperation.update:
-        this._contactService.updateContact(Global.BASE_USER_ENDPOINT + 'updateContact', contactData.contactid, contactData).subscribe(
+        this._contactService.updateContact(Global.BASE_USER_ENDPOINT + 'updateContact', contactData.contactId, contactData).subscribe(
           data => {
             // Success
             if (data.message) {
@@ -148,7 +148,7 @@ export class ContactformComponent implements OnInit {
         );
         break;
       case DBOperation.delete:
-        this._contactService.deleteContact(Global.BASE_USER_ENDPOINT + 'deleteContact', contactData.contactid).subscribe(
+        this._contactService.deleteContact(Global.BASE_USER_ENDPOINT + 'deleteContact', contactData.contactId).subscribe(
           data => {
             // Success
             if (data.message) {

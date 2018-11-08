@@ -31,7 +31,7 @@ namespace contact_app.Controllers
         [Route("getContact")]  
         public IActionResult GetById(long id) {  
                 // filter contact records by contact id  
-                var item = _context.Contacts.FirstOrDefault(t => t.ContactId == id);  
+                var item = _context.Contacts.FirstOrDefault(t => t.contactId == id);  
                 if (item == null) {  
                     return NotFound();  
                 }  
@@ -82,7 +82,7 @@ namespace contact_app.Controllers
                 if (item == null || id == 0) {  
                     return BadRequest();  
                 }  
-                var contact = _context.Contacts.FirstOrDefault(t => t.ContactId == id);  
+                var contact = _context.Contacts.FirstOrDefault(t => t.contactId == id);  
                 if (contact == null) {  
                     return NotFound();  
                 }  
@@ -102,7 +102,7 @@ namespace contact_app.Controllers
         [HttpDelete("{id}")]  
         [Route("deleteContact")]  
         public IActionResult Delete(long id) {  
-            var contact = _context.Contacts.FirstOrDefault(t => t.ContactId == id);  
+            var contact = _context.Contacts.FirstOrDefault(t => t.contactId == id);  
             if (contact == null) {  
                 return NotFound();  
             }  

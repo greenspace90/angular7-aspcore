@@ -1,57 +1,57 @@
-<form  (ngSubmit)="onSubmit(vehicleFrm)"  [formGroup]="vehicleFrm">  
-    <h2>{{data.modalTitle}}</h2>  
-      
-    <div>  
-      <mat-form-field appearance="outline">  
-        <mat-label>Make</mat-label>  
-        <input matInput placeholder="make" formControlName="make">  
-        <mat-error *ngIf="formErrors.make">  
-          {{ formErrors.make }}  
-        </mat-error>  
-      </mat-form-field>  
-    </div>
-     <div>  
-      <mat-form-field appearance="outline">  
-        <mat-label>Model</mat-label>  
-        <input matInput placeholder="model" formControlName="model">  
-        <mat-error *ngIf="formErrors.model">  
-          {{ formErrors.model }}  
-        </mat-error>  
-      </mat-form-field>  
-    </div>
-    <div>  
-      <mat-form-field appearance="outline">  
-        <mat-label>Version</mat-label>  
-        <input matInput placeholder="version" formControlName="version">  
-        <mat-error *ngIf="formErrors.version">  
-          {{ formErrors.version }}  
-        </mat-error>  
-      </mat-form-field>  
-    </div>
-    <div>  
-        <mat-form-field appearance="outline">  
-        <mat-label>Registration</mat-label>  
-        <input matInput placeholder="registration" formControlName="registration">  
-        <mat-error *ngIf="formErrors.registration">  
-          {{ formErrors.registration }}  
-        </mat-error>  
-      </mat-form-field>  
-    </div>  
-    <div>  
-      <mat-form-field appearance="outline">  
-        <mat-select placeholder="Select a Bodystyle" formControlName="typeid">  
-          <mat-option *ngFor="let bodystyle of bodystyles" [value]="bodystyle.typeid">  
-            {{ bodystyle.name }}  
-          </mat-option>  
-        </mat-select>  
-        <mat-error *ngIf="formErrors.bodystyle">  
-          {{ formErrors.bodystyle }}  
-        </mat-error>  
-      </mat-form-field>  
-    </div>  
-      <button type="button" mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>   
-      <button type="submit" mat-raised-button color="primary" [disabled]="vehicleFrm.invalid">{{data.modalBtnTitle}}</button>  
-    </div>  
-      
-    </form>  
-  
+<form (ngSubmit)="onSubmit(vehicleFrm)" [formGroup]="vehicleFrm">
+  <h2>{{data.modalTitle}}</h2>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Make</mat-label>
+      <input matInput placeholder="make" formControlName="make">
+      <mat-error *ngIf="formErrors.make">
+        {{ formErrors.make }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Model</mat-label>
+      <input matInput placeholder="model" formControlName="model">
+      <mat-error *ngIf="formErrors.model">
+        {{ formErrors.model }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Version</mat-label>
+      <input matInput placeholder="version" formControlName="version">
+      <mat-error *ngIf="formErrors.version">
+        {{ formErrors.version }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Registration</mat-label>
+      <input matInput placeholder="registration" formControlName="registration">
+      <mat-error *ngIf="formErrors.registration">
+        {{ formErrors.registration }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-select placeholder="Select a Bodystyle" formControlName="typeid">
+        <mat-option *ngFor="let bodystyle of bodystyles" [value]="bodystyle.typeid">
+          {{ bodystyle.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formErrors.typeid">
+        {{ formErrors.typeid }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <button type="button" mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="vehicleFrm.invalid">{{data.modalBtnTitle}}</button>
+  </div>
+
+</form>

@@ -28,7 +28,7 @@ namespace contact_app.Controllers
         [Route("getVehiclesByContactId")]  
         public IEnumerable < Vehicle > GetByContactId(long id) {  
               // filter vehicle records by vehicle id  
-                var items = _context.Vehicles.Where(t => t.ContactId == id).ToList();  
+                var items = _context.Vehicles.Where(t => t.contactId == id).ToList();  
                 // if (items == null) {  
                 //     return NotFound();  
                 // }  
@@ -39,7 +39,7 @@ namespace contact_app.Controllers
         [Route("getVehicle")]  
         public IActionResult GetById(long id) {  
                 // filter vehicle records by vehicle id  
-                var item = _context.Vehicles.FirstOrDefault(t => t.VehicleId == id);  
+                var item = _context.Vehicles.FirstOrDefault(t => t.vehicleId == id);  
                 if (item == null) {  
                     return NotFound();  
                 }  
@@ -54,12 +54,12 @@ namespace contact_app.Controllers
                     return BadRequest();  
                 }  
                 _context.Vehicles.Add(new Vehicle {  
-                    Make = item.Make,
-                    Model = item.Model,
-                    Version = item.Version,
-                    Registration = item.Registration,
-                    ContactId = item.ContactId,
-                    TypeId = item.TypeId
+                    make = item.make,
+                    model = item.model,
+                    version = item.version,
+                    registration = item.registration,
+                    contactId = item.contactId,
+                    typeId = item.typeId
                 });  
                 _context.SaveChanges();  
                 return Ok(new {  
@@ -74,16 +74,16 @@ namespace contact_app.Controllers
                 if (item == null || id == 0) {  
                     return BadRequest();  
                 }  
-                var vehicle = _context.Vehicles.FirstOrDefault(t => t.VehicleId == id);  
+                var vehicle = _context.Vehicles.FirstOrDefault(t => t.vehicleId == id);  
                 if (vehicle == null) {  
                     return NotFound();  
                 }  
-                vehicle.Make = item.Make;
-                vehicle.Model = item.Model;
-                vehicle.Version = item.Version;
-                vehicle.Registration = item.Registration;
-                vehicle.ContactId = item.ContactId;
-                vehicle.TypeId = item.TypeId;  
+                vehicle.make = item.make;
+                vehicle.model = item.model;
+                vehicle.version = item.version;
+                vehicle.registration = item.registration;
+                vehicle.contactId = item.contactId;
+                vehicle.typeId = item.typeId;  
                 _context.Vehicles.Update(vehicle);  
                 _context.SaveChanges();  
                 return Ok(new {  
@@ -94,7 +94,7 @@ namespace contact_app.Controllers
         [HttpDelete("{id}")]  
         [Route("deleteVehicle")]  
         public IActionResult Delete(long id) {  
-            var vehicle = _context.Vehicles.FirstOrDefault(t => t.VehicleId == id);  
+            var vehicle = _context.Vehicles.FirstOrDefault(t => t.vehicleId == id);  
             if (vehicle == null) {  
                 return NotFound();  
             }  

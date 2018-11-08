@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace angular7_aspcore.Models.DTOs
 {
     public class Contact {  
-        public long ? ContactId {  
+        public long ? contactId {  
             get;  
             set;  
         }  

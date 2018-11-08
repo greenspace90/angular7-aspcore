@@ -3,10 +3,10 @@ import { IBodystyle } from '@app/model/bodystyle';
 
 export interface IVehicle {
     vehicleid: number;
-    name: string;
     make: string;
     model: string;
     version: string;
+    registration: string;
     contactid: number;
     typeid: number;
 }

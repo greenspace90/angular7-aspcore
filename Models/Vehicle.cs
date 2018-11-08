@@ -6,42 +6,42 @@ using Microsoft.AspNetCore.Mvc;
 namespace angular7_aspcore.Models
 {
     public class Vehicle {  
-        public long ? VehicleId {  
+        public long ? vehicleId {  
             get;  
             set;  
         }  
-        public string Make {  
+        public string make {  
             get;  
             set;  
         }  
-        public string Model {  
+        public string model {  
             get;  
             set;  
         }  
-        public string Version {  
+        public string version {  
             get;  
             set;  
         }  
-        public string Registration {  
+        public string registration {  
             get;  
             set;  
         } 
-        public long ? ContactId {  
+        public long ? contactId {  
             get;  
             set;  
         } 
-        [ForeignKey("ContactId")]
-        public Contact Contact {
+        [ForeignKey("contactId")]
+        public Contact contact {
             get;
             set;
         }         
-        public long ? TypeId {  
+        public long ? typeId {  
             get;  
             set;  
         }
 
-        [ForeignKey("TypeId")]
-        public Bodystyle Bodystyle {
+        [ForeignKey("typeId")]
+        public Bodystyle bodystyle {
             get;
             set;
         }  

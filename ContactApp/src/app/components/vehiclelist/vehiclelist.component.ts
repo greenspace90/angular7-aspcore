@@ -24,7 +24,7 @@ export class VehiclelistComponent implements OnInit {
   modalBtnTitle: string;
 
   // set columns that will need to show in listing table
-  displayedColumns = ['make', 'model', 'registration', 'bodystyle'];
+  displayedColumns = ['make', 'model', 'version', 'registration', 'action'];
   // setting up datasource for material table
   dataSource = new MatTableDataSource<IVehicle>();
 

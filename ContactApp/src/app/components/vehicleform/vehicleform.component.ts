@@ -90,18 +90,15 @@ export class VehicleformComponent implements OnInit {
   // form errors model
   // tslint:disable-next-line:member-ordering
   formErrors = {
-    'name': '',
     'make': '',
     'model': '',
-    'version': ''
+    'version': '',
+    'registration': '',  
+    'typeid': ''  
   };
   // custom valdiation messages
   // tslint:disable-next-line:member-ordering
   validationMessages = {
-    'name': {
-      'maxlength': 'Name cannot be more than 50 characters long.',
-      'required': 'Name is required.'
-    },
     'make': {
       'required': 'Make is required.'
     },
@@ -110,7 +107,13 @@ export class VehicleformComponent implements OnInit {
     },
     'version': {
       'required': 'Version is required.'
-    }
+    },
+    'registration': {
+      'required': 'Registration is required.'
+    },
+    'typeid': {
+      'required': 'Bodystyle is required.'
+    },
   };
 
   onSubmit(formData: any) {
