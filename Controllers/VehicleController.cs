@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using angular7_aspcore.Models;
 
@@ -21,25 +20,20 @@ namespace contact_app.Controllers
         [Route("getAllVehicles")]  
         public IEnumerable < Vehicle > GetAll() {  
                 // fetch all vehicle records  
-                return _context.Vehicles.ToList();  
+                return _context.Vehicles.Include(v => v.bodystyle).ToList();  
             }
 
         [HttpGet("{id}")]  
         [Route("getVehiclesByContactId")]  
         public IEnumerable < Vehicle > GetByContactId(long id) {  
-              // filter vehicle records by vehicle id  
-                var items = _context.Vehicles.Where(t => t.contactId == id).ToList();  
-                // if (items == null) {  
-                //     return NotFound();  
-                // }  
-                return items;    
+                return _context.Vehicles.Include(v => v.bodystyle).Where(t => t.contactId == id).ToList();  
             }
 
         [HttpGet("{id}")]  
         [Route("getVehicle")]  
         public IActionResult GetById(long id) {  
                 // filter vehicle records by vehicle id  
-                var item = _context.Vehicles.FirstOrDefault(t => t.vehicleId == id);  
+                var item = _context.Vehicles.Include(v => v.bodystyle).FirstOrDefault(t => t.vehicleId == id);  
                 if (item == null) {  
                     return NotFound();  
                 }  
