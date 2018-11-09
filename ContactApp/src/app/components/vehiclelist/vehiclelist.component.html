@@ -1,6 +1,6 @@
 <h2 style="text-align: center;">Vehicle List</h2>
 <div class="vehiclelist-container mat-elevation-z8">
-  <!-- <div><button title="Create" mat-raised-button color="accent" (click)="addVehicle(element.contactid)">Create</button></div> -->
+  <!-- <div><button title="Create" mat-raised-button color="accent" (click)="addVehicle(element.contactId)">Create</button></div> -->
   <table mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- Make Column -->
@@ -28,16 +28,16 @@
     </ng-container>
 
     <!-- Bodystyle Column -->
-    <!-- <ng-container matColumnDef="bodystyle">
+    <ng-container matColumnDef="bodystyle">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Bodystyle </th>
       <td mat-cell *matCellDef="let element"> {{element.bodystyle.name}} </td>
-    </ng-container> -->
+    </ng-container>
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let element">
-        <button title="Edit" mat-raised-button color="primary" (click)="editVehicle(element.vehicleid)">Edit</button>
-        <button title="Delete" mat-raised-button color="warn" (click)="deleteVehicle(element.vehicleid)">Delete</button>
+        <button title="Edit" mat-raised-button color="primary" (click)="editVehicle(element.vehicleId)">Edit</button>
+        <button title="Delete" mat-raised-button color="warn" (click)="deleteVehicle(element.vehicleId)">Delete</button>
       </td>
     </ng-container>
 
