@@ -1,4 +1,4 @@
 export interface IBodystyle {
-    typeid: number,
+    typeId: number,
     name: string
 }

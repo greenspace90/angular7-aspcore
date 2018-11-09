@@ -2,11 +2,11 @@ namespace angular7_aspcore.Models
 {
     public abstract class Type
     {
-        public long ? TypeId {  
+        public long ? typeId {  
             get;  
             set;  
             }  
-        public string Name {
+        public string name {
             get;
             set;
         }

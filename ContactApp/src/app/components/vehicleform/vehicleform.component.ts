@@ -4,66 +4,74 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
 
-import { ContactlistComponent } from '../contactlist/contactlist.component';
+import { VehiclelistComponent } from '../vehiclelist/vehiclelist.component';
 
-import { IContact } from '@app/model/contact';
-import { ContactService } from '@app/services/contact.service';
+import { IVehicle } from '@app/model/vehicle';
+import { VehicleService } from '@app/services/vehicle.service';
+import { BodystyleService } from '@app/services/bodystyle.service';
 import { DBOperation } from '@app/shared/DBOperation';
 import { Global } from '@app/shared/Global';
 
 @Component({
-  selector: 'app-contactform',
-  templateUrl: './contactform.component.html',
-  styleUrls: ['./contactform.component.css']
+  selector: 'app-vehicleform',
+  templateUrl: './vehicleform.component.html',
+  styleUrls: ['./vehicleform.component.css']
 })
 
-export class ContactformComponent implements OnInit {
+export class VehicleformComponent implements OnInit {
   msg: string;
   indLoading = false;
-  contactFrm: FormGroup;
+  vehicleFrm: FormGroup;
   // dbops: DBOperation;
   // modalTitle: string;
   // modalBtnTitle: string;
   listFilter: string;
   selectedOption: string;
   // contact: IContact;
-  genders = [];
-  technologies = [];
+  // genders = [];
+  // technologies = [];
+  bodystyles = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private _contactService: ContactService,
-    public dialogRef: MatDialogRef<ContactlistComponent>) { }
+    private _vehicleService: VehicleService,
+    private _bodystyleService: BodystyleService,
+    public dialogRef: MatDialogRef<VehiclelistComponent>) { }
 
   ngOnInit() {
-    // built contact form
-    this.contactFrm = this.fb.group({
-      contactId: [''],
+    // built vehicle form
+    this.vehicleFrm = this.fb.group({
+      vehicleId: [''],
       name: ['', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.required, Validators.email]],
-      gender: ['', [Validators.required]],
-      birth: ['', [Validators.required]],
-      techno: ['', [Validators.required]],
-      message: ['', [Validators.required]]
+      make: ['', [Validators.required, Validators.email]],
+      model: ['', [Validators.required]],
+      version: ['', [Validators.required]],
+      contactId: [''],
+      typeId: [''],
     });
-    this.genders = Global.genders;
-    this.technologies = Global.technologies;
+    // this.genders = Global.genders;
+    // this.technologies = Global.technologies;
+
+    this._bodystyleService.getAllBodystyles('api/bodystyle/getAllBodystyles')
+    .subscribe(styles => {
+      this.bodystyles = styles;
+    });
 
     // subscribe on value changed event of form to show validation message
-    this.contactFrm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.vehicleFrm.valueChanges.subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
 
     if (this.data.dbops === DBOperation.create) {
-      this.contactFrm.reset();
+      this.vehicleFrm.reset();
     } else {
-      this.contactFrm.setValue(this.data.contact);
+      this.vehicleFrm.setValue(this.data.vehicle);
     }
     this.SetControlsState(this.data.dbops === DBOperation.delete ? false : true);
   }
   // form value change event
   onValueChanged(data?: any) {
-    if (!this.contactFrm) { return; }
-    const form = this.contactFrm;
+    if (!this.vehicleFrm) { return; }
+    const form = this.vehicleFrm;
     // tslint:disable-next-line:forin
     for (const field in this.formErrors) {
       // clear previous error message (if any)
@@ -82,43 +90,36 @@ export class ContactformComponent implements OnInit {
   // form errors model
   // tslint:disable-next-line:member-ordering
   formErrors = {
-    'name': '',
-    'email': '',
-    'gender': '',
-    'birth': '',
-    'techno': '',
-    'message': ''
+    'make': '',
+    'model': '',
+    'version': '',
+    'registration': '',  
+    'typeId': ''  
   };
   // custom valdiation messages
   // tslint:disable-next-line:member-ordering
   validationMessages = {
-    'name': {
-      'maxlength': 'Name cannot be more than 50 characters long.',
-      'required': 'Name is required.'
+    'make': {
+      'required': 'Make is required.'
     },
-    'email': {
-      'email': 'Invalid email format.',
-      'required': 'Email is required.'
+    'model': {
+      'required': 'Model is required.'
     },
-    'gender': {
-      'required': 'Gender is required.'
+    'version': {
+      'required': 'Version is required.'
     },
-    'techno': {
-      'required': 'Technology is required.'
+    'registration': {
+      'required': 'Registration is required.'
     },
-    'birth': {
-      'required': 'Birthday is required.'
+    'typeId': {
+      'required': 'Bodystyle is required.'
     },
-    'message': {
-      'required': 'message is required.'
-    }
-
   };
+
   onSubmit(formData: any) {
-    const contactData = this.mapDateData(formData.value);
     switch (this.data.dbops) {
       case DBOperation.create:
-        this._contactService.addContact(Global.BASE_USER_ENDPOINT + 'addContact', contactData).subscribe(
+        this._vehicleService.addVehicle('api/vehicle/addVehicle', formData).subscribe(
           data => {
             // Success
             if (data.message) {
@@ -133,7 +134,7 @@ export class ContactformComponent implements OnInit {
         );
         break;
       case DBOperation.update:
-        this._contactService.updateContact(Global.BASE_USER_ENDPOINT + 'updateContact', contactData.contactId, contactData).subscribe(
+        this._vehicleService.updateVehicle('api/vehicle/updateVehicle', formData.vehicleid, formData).subscribe(
           data => {
             // Success
             if (data.message) {
@@ -148,7 +149,7 @@ export class ContactformComponent implements OnInit {
         );
         break;
       case DBOperation.delete:
-        this._contactService.deleteContact(Global.BASE_USER_ENDPOINT + 'deleteContact', contactData.contactId).subscribe(
+        this._vehicleService.deleteVehicle('api/vehicle/deleteVehicle', formData.vehicleid).subscribe(
           data => {
             // Success
             if (data.message) {
@@ -165,12 +166,6 @@ export class ContactformComponent implements OnInit {
     }
   }
   SetControlsState(isEnable: boolean) {
-    isEnable ? this.contactFrm.enable() : this.contactFrm.disable();
-  }
-
-  mapDateData(contact: IContact): IContact {
-    contact.birth = new Date(contact.birth).toISOString();
-    return contact;
+    isEnable ? this.vehicleFrm.enable() : this.vehicleFrm.disable();
   }
 }
-
