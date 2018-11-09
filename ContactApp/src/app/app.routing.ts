@@ -11,6 +11,7 @@ const appRoutes: Routes = [
   { path: '',  pathMatch: 'full' , component: ContactlistComponent },
   { path: 'contactform', component: ContactformComponent },
   { path: 'vehiclelist', component: VehiclelistComponent },
+  { path: 'vehiclelist/:id', component: VehiclelistComponent },
   { path: 'vehicleform', component: VehicleformComponent }
 ];
 
@@ -22,5 +23,6 @@ const appRoutes: Routes = [
 // { path: 'vehiclelist', component: VehiclelistComponent },
 // { path: 'vehicleform', component: VehicleformComponent }]}];
 
+// export const Routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 export const Routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
