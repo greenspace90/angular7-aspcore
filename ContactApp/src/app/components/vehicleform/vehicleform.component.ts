@@ -41,13 +41,13 @@ export class VehicleformComponent implements OnInit {
   ngOnInit() {
     // built vehicle form
     this.vehicleFrm = this.fb.group({
-      vehicleid: [''],
+      vehicleId: [''],
       name: ['', [Validators.required, Validators.maxLength(50)]],
       make: ['', [Validators.required, Validators.email]],
       model: ['', [Validators.required]],
       version: ['', [Validators.required]],
-      contactid: [''],
-      typeid: [''],
+      contactId: [''],
+      typeId: [''],
     });
     // this.genders = Global.genders;
     // this.technologies = Global.technologies;
@@ -94,7 +94,7 @@ export class VehicleformComponent implements OnInit {
     'model': '',
     'version': '',
     'registration': '',  
-    'typeid': ''  
+    'typeId': ''  
   };
   // custom valdiation messages
   // tslint:disable-next-line:member-ordering
@@ -111,7 +111,7 @@ export class VehicleformComponent implements OnInit {
     'registration': {
       'required': 'Registration is required.'
     },
-    'typeid': {
+    'typeId': {
       'required': 'Bodystyle is required.'
     },
   };
