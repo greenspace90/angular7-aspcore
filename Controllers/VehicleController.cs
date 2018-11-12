@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using angular7_aspcore.Models;
+using DTO = angular7_aspcore.Models.DTOs;
 
 namespace contact_app.Controllers
 {
@@ -63,7 +64,7 @@ namespace contact_app.Controllers
 
         [HttpPut("{id}")]  
         [Route("updateVehicle")]  
-        public IActionResult Update(long id, [FromBody] Vehicle item) {  
+        public IActionResult Update(long id, [FromBody] DTO.SaveVehicle item) {  
                 // set bad request if vehicle data is not provided in body  
                 if (item == null || id == 0) {  
                     return BadRequest();  
