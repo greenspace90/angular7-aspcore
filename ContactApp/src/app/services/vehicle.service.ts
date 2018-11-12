@@ -18,8 +18,14 @@ import {
   catchError  
 } from 'rxjs/operators';  
 import {  
+  ISaveVehicle 
+} from '../model/savevehicle';  
+import {  
   IVehicle 
 } from '../model/vehicle';  
+import {  
+  IBodystyle 
+} from '../model/bodystyle';  
 const httpOptions = {  
   headers: new HttpHeaders({  
       'Content-Type': 'application/json'  
@@ -28,7 +34,7 @@ const httpOptions = {
 @Injectable()  
 export class VehicleService {  
   constructor(private http: HttpClient) {}  
-  // get all vehicle data    
+  // get all vehicle data
   getAllVehicles(url: string): Observable < IVehicle[] > {  
       return this.http.get < IVehicle[] > (url).pipe(catchError(this.handleError));  
   }  
@@ -42,7 +48,8 @@ export class VehicleService {
       return this.http.post(url, JSON.stringify(vehicle), httpOptions).pipe(catchError(this.handleError));  
   }  
   // update vehicle details    
-  updateVehicle(url: string, id: number, vehicle: IVehicle): Observable < any > {  
+//   updateVehicle(url: string, id: number, vehicle: IVehicle): Observable < any > {  
+  updateVehicle(url: string, id: number, vehicle: ISaveVehicle): Observable < any > {  
       const newurl = `${url}?id=${id}`;  
       return this.http.put(newurl, vehicle, httpOptions).pipe(catchError(this.handleError));  
   }  

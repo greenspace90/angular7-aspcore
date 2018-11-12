@@ -3,6 +3,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using angular7_aspcore.Models;
+using DTO = angular7_aspcore.Models.DTOs;
+using AutoMapper;
 
 namespace contact_app.Controllers
 {
@@ -10,10 +12,13 @@ namespace contact_app.Controllers
     [Produces("application/json")]  
     [Route("api/[controller]")]  
     public class VehicleController: ControllerBase {  
-        private readonly ContactAppContext _context;  
+        private readonly ContactAppContext _context;
+        private readonly IMapper _mapper; 
+  
         // initiate database context  
-        public VehicleController(ContactAppContext context) {  
-                _context = context;  
+        public VehicleController(ContactAppContext context, IMapper mapper) {  
+                _context = context; 
+                _mapper = mapper;  
             }
 
         [HttpGet]  
@@ -63,7 +68,7 @@ namespace contact_app.Controllers
 
         [HttpPut("{id}")]  
         [Route("updateVehicle")]  
-        public IActionResult Update(long id, [FromBody] Vehicle item) {  
+        public IActionResult Update(long id, [FromBody] DTO.SaveVehicle item) {  
                 // set bad request if vehicle data is not provided in body  
                 if (item == null || id == 0) {  
                     return BadRequest();  
@@ -71,13 +76,14 @@ namespace contact_app.Controllers
                 var vehicle = _context.Vehicles.FirstOrDefault(t => t.vehicleId == id);  
                 if (vehicle == null) {  
                     return NotFound();  
-                }  
-                vehicle.make = item.make;
-                vehicle.model = item.model;
-                vehicle.version = item.version;
-                vehicle.registration = item.registration;
-                vehicle.contactId = item.contactId;
-                vehicle.typeId = item.typeId;  
+                }
+                _mapper.Map(item, vehicle);
+                // vehicle.make = item.make;
+                // vehicle.model = item.model;
+                // vehicle.version = item.version;
+                // vehicle.registration = item.registration;
+                // vehicle.contactId = item.contactId;
+                // vehicle.typeId = item.typeId;  
                 _context.Vehicles.Update(vehicle);  
                 _context.SaveChanges();  
                 return Ok(new {  

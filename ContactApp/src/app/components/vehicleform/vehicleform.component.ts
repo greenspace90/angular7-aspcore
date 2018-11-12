@@ -6,11 +6,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } f
 
 import { VehiclelistComponent } from '../vehiclelist/vehiclelist.component';
 
-import { IVehicle } from '@app/model/vehicle';
+import { ISaveVehicle} from '@app/model/savevehicle';
 import { VehicleService } from '@app/services/vehicle.service';
 import { BodystyleService } from '@app/services/bodystyle.service';
 import { DBOperation } from '@app/shared/DBOperation';
 import { Global } from '@app/shared/Global';
+import { IVehicle } from '@app/model/vehicle';
 
 @Component({
   selector: 'app-vehicleform',
@@ -31,6 +32,7 @@ export class VehicleformComponent implements OnInit {
   // genders = [];
   // technologies = [];
   bodystyles = [];
+  savevehicle: IVehicle;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -42,12 +44,14 @@ export class VehicleformComponent implements OnInit {
     // built vehicle form
     this.vehicleFrm = this.fb.group({
       vehicleId: [''],
-      name: ['', [Validators.required, Validators.maxLength(50)]],
-      make: ['', [Validators.required, Validators.email]],
+      make: ['', [Validators.required]],
       model: ['', [Validators.required]],
       version: ['', [Validators.required]],
+      registration: ['', [Validators.required]], 
       contactId: [''],
+      contact: [''],
       typeId: [''],
+      bodystyle: ['']
     });
     // this.genders = Global.genders;
     // this.technologies = Global.technologies;
@@ -134,7 +138,8 @@ export class VehicleformComponent implements OnInit {
         );
         break;
       case DBOperation.update:
-        this._vehicleService.updateVehicle('api/vehicle/updateVehicle', formData.vehicleid, formData).subscribe(
+        this.savevehicle = formData.value;
+        this._vehicleService.updateVehicle('api/vehicle/updateVehicle', this.data.vehicle.vehicleId, this.savevehicle).subscribe(
           data => {
             // Success
             if (data.message) {
@@ -149,7 +154,7 @@ export class VehicleformComponent implements OnInit {
         );
         break;
       case DBOperation.delete:
-        this._vehicleService.deleteVehicle('api/vehicle/deleteVehicle', formData.vehicleid).subscribe(
+        this._vehicleService.deleteVehicle('api/vehicle/deleteVehicle', formData.vehicleId).subscribe(
           data => {
             // Success
             if (data.message) {
