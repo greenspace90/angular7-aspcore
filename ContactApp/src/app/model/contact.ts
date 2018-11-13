@@ -5,5 +5,5 @@ export interface IContact {
     gender: number;
     birth: string;
     techno: string;
-    message: string;
+    role: string;
 }
