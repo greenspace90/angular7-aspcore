@@ -9,7 +9,7 @@ namespace  angular7_aspcore
         public VehicleProfile()
         {
             // DTOs -> Models
-            CreateMap<DTO.SaveVehicle, Vehicle>();
+            CreateMap<DTO.Vehicle, Vehicle>();
         }
     }    
 }

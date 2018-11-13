@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace angular7_aspcore.Models.DTOs
 {
-    public class SaveVehicle {  
+    public class Vehicle {  
         public string make {  
             get;  
             set;  

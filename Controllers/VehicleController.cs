@@ -47,19 +47,12 @@ namespace contact_app.Controllers
 
         [HttpPost]  
         [Route("addVehicle")]  
-        public IActionResult Create([FromBody] Vehicle item) {  
+        public IActionResult Create([FromBody] DTO.Vehicle item) {  
                 // set bad request if vehicle data is not provided in body  
                 if (item == null) {  
                     return BadRequest();  
-                }  
-                _context.Vehicles.Add(new Vehicle {  
-                    make = item.make,
-                    model = item.model,
-                    version = item.version,
-                    registration = item.registration,
-                    contactId = item.contactId,
-                    typeId = item.typeId
-                });  
+                }
+                _context.Vehicles.Add(_mapper.Map<Vehicle>(item));  
                 _context.SaveChanges();  
                 return Ok(new {  
                     message = "Vehicle is added successfully."  
@@ -68,7 +61,7 @@ namespace contact_app.Controllers
 
         [HttpPut("{id}")]  
         [Route("updateVehicle")]  
-        public IActionResult Update(long id, [FromBody] DTO.SaveVehicle item) {  
+        public IActionResult Update(long id, [FromBody] DTO.Vehicle item) {  
                 // set bad request if vehicle data is not provided in body  
                 if (item == null || id == 0) {  
                     return BadRequest();  
@@ -78,12 +71,6 @@ namespace contact_app.Controllers
                     return NotFound();  
                 }
                 _mapper.Map(item, vehicle);
-                // vehicle.make = item.make;
-                // vehicle.model = item.model;
-                // vehicle.version = item.version;
-                // vehicle.registration = item.registration;
-                // vehicle.contactId = item.contactId;
-                // vehicle.typeId = item.typeId;  
                 _context.Vehicles.Update(vehicle);  
                 _context.SaveChanges();  
                 return Ok(new {  

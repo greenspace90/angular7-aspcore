@@ -123,7 +123,11 @@ export class VehicleformComponent implements OnInit {
   onSubmit(formData: any) {
     switch (this.data.dbops) {
       case DBOperation.create:
-        this._vehicleService.addVehicle('api/vehicle/addVehicle', formData).subscribe(
+      this.savevehicle = formData.value;
+      this.savevehicle.contactId = this.data.contactId;
+
+        // this._vehicleService.addVehicle('api/vehicle/addVehicle', formData).subscribe(
+        this._vehicleService.addVehicle('api/vehicle/addVehicle', this.savevehicle).subscribe(
           data => {
             // Success
             if (data.message) {

@@ -44,7 +44,7 @@ export class VehicleService {
       return this.http.get < IVehicle[] > (newurl).pipe(catchError(this.handleError));  
   }  
   // insert new vehicle details    
-  addVehicle(url: string, vehicle: IVehicle): Observable < any > {  
+  addVehicle(url: string, vehicle: ISaveVehicle): Observable < any > {  
       return this.http.post(url, JSON.stringify(vehicle), httpOptions).pipe(catchError(this.handleError));  
   }  
   // update vehicle details    
