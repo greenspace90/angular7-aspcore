@@ -28,7 +28,7 @@ namespace angular7_aspcore.Models
             get;  
             set;  
         }  
-        public string message {  
+        public string role {  
             get;  
             set;  
         }  
