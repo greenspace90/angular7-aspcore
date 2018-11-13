@@ -23,7 +23,7 @@ export class ContactlistComponent implements OnInit {
   modalBtnTitle: string;
 
   // set columns that will need to show in listing table
-  displayedColumns = ['name', 'email', 'gender', 'birth', 'techno', 'message', 'action'];
+  displayedColumns = ['name', 'email', 'gender', 'birth', 'techno', 'role', 'action'];
   // setting up datasource for material table
   dataSource = new MatTableDataSource<IContact>();
 

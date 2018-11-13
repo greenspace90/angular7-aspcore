@@ -8,5 +8,5 @@ export class Global {
         name: 'Female',
         id: 1
     }];
-    public static technologies = ['JavaScript', 'SharePoint', 'C#'];
+    public static technologies = ['TypeScript', 'Angular', 'C#'];
 }
