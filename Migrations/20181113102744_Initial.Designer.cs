@@ -10,8 +10,8 @@ using angular7_aspcore.Models;
 namespace angular7_aspcore.Migrations
 {
     [DbContext(typeof(ContactAppContext))]
-    [Migration("20181108092540_CamelCaseProperties")]
-    partial class CamelCaseProperties
+    [Migration("20181113102744_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,15 +33,21 @@ namespace angular7_aspcore.Migrations
 
                     b.Property<byte>("gender");
 
-                    b.Property<string>("message");
-
                     b.Property<string>("name");
+
+                    b.Property<string>("role");
 
                     b.Property<string>("techno");
 
                     b.HasKey("contactId");
 
                     b.ToTable("Contacts");
+
+                    b.HasData(
+                        new { contactId = 1L, birth = new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "ar.b@isp.com", gender = (byte)0, role = "Developer", techno = "Typescript" },
+                        new { contactId = 2L, birth = new DateTime(1988, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "al.l@mail.com", gender = (byte)1, role = "Front end", techno = "Angular" },
+                        new { contactId = 3L, birth = new DateTime(1975, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "example@mail.net", gender = (byte)0, role = "Lead developer", techno = "C#" }
+                    );
                 });
 
             modelBuilder.Entity("angular7_aspcore.Models.Type", b =>
@@ -87,6 +93,15 @@ namespace angular7_aspcore.Migrations
                     b.HasIndex("typeId");
 
                     b.ToTable("Vehicles");
+
+                    b.HasData(
+                        new { vehicleId = 1L, contactId = 1L, make = "Ford", model = "Focus", registration = "FG53BDA", typeId = 2L, version = "1.0 EcoBoost" },
+                        new { vehicleId = 2L, contactId = 2L, make = "Fiat", model = "500", registration = "FG18BDE", typeId = 2L, version = "Abarth" },
+                        new { vehicleId = 3L, contactId = 3L, make = "Mercedes-Benz", model = "C-Class", registration = "VG68BDA", typeId = 1L, version = "180" },
+                        new { vehicleId = 4L, contactId = 3L, make = "BMW", model = "X5", registration = "NH68LKU", typeId = 3L, version = "5.0 M" },
+                        new { vehicleId = 5L, contactId = 2L, make = "Porsche", model = "Boxster", registration = "LP67AWE", typeId = 4L, version = "S" },
+                        new { vehicleId = 6L, contactId = 2L, make = "Mercedes-Benz", model = "SL", registration = "MB66DSA", typeId = 5L, version = "500" }
+                    );
                 });
 
             modelBuilder.Entity("angular7_aspcore.Models.Bodystyle", b =>
@@ -97,6 +112,14 @@ namespace angular7_aspcore.Migrations
                     b.ToTable("Bodystyle");
 
                     b.HasDiscriminator().HasValue("Bodystyle");
+
+                    b.HasData(
+                        new { typeId = 1L, name = "Saloon" },
+                        new { typeId = 2L, name = "Hatchback" },
+                        new { typeId = 3L, name = "SUV" },
+                        new { typeId = 4L, name = "Sports" },
+                        new { typeId = 5L, name = "GT Coupe" }
+                    );
                 });
 
             modelBuilder.Entity("angular7_aspcore.Models.Vehicle", b =>
