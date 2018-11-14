@@ -6,8 +6,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } f
 
 import { ContactlistComponent } from '../contactlist/contactlist.component';
 
-import { IContact } from '@app/model/contact';
-import { ContactService } from '@app/services/contact.service';
+import { IContact } from '@app/_models/';
+import { ContactService } from '@app/_services/';
 import { DBOperation } from '@app/shared/DBOperation';
 import { Global } from '@app/shared/Global';
 

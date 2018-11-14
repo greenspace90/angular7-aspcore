@@ -4,8 +4,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { ContactformComponent } from '../contactform/contactform.component';
 
-import { ContactService } from '@app/services/contact.service';
-import { IContact } from '@app/model/contact';
+import { ContactService } from '@app/_services/';
+import { IContact } from '@app/_models/';
 import { DBOperation } from '@app/shared/DBOperation';
 import { Global } from '@app/shared/Global';
 

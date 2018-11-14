@@ -5,22 +5,11 @@ namespace angular7_aspcore.Models
 {
     public class ContactAppContext: DbContext {  
         public ContactAppContext(DbContextOptions <ContactAppContext> options): base(options) {}  
-        public DbSet <Contact> Contacts {  
-            get;  
-            set;  
-        }  
-        public DbSet <Type> Types {  
-            get;  
-            set;  
-        }  
-        public DbSet <Bodystyle> Bodystyles {  
-            get;  
-            set;  
-        }  
-        public DbSet <Vehicle> Vehicles {  
-            get;  
-            set;  
-        } 
+        public DbSet <Contact> Contacts { get; set; } 
+        public DbSet <Type> Types { get; set; } 
+        public DbSet <Bodystyle> Bodystyles { get; set; } 
+        public DbSet <Vehicle> Vehicles { get; set; } 
+        public DbSet<User> Users { get; set; } 
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

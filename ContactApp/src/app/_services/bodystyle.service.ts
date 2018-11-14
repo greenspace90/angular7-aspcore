@@ -18,43 +18,31 @@ import {
   catchError  
 } from 'rxjs/operators';  
 import {  
-  ISaveVehicle 
-} from '../model/savevehicle';  
-import {  
-  IVehicle 
-} from '../model/vehicle';  
-import {  
-  IBodystyle 
-} from '../model/bodystyle';  
+  IBodystyle
+} from '../_models/bodystyle';  
 const httpOptions = {  
   headers: new HttpHeaders({  
       'Content-Type': 'application/json'  
   })  
 };  
 @Injectable()  
-export class VehicleService {  
+export class BodystyleService {  
   constructor(private http: HttpClient) {}  
-  // get all vehicle data
-  getAllVehicles(url: string): Observable < IVehicle[] > {  
-      return this.http.get < IVehicle[] > (url).pipe(catchError(this.handleError));  
-  }  
-  // get all contact vehicle data    
-  getVehiclesByContactId(url: string, id: number): Observable < IVehicle[] > {
-      const newurl = `${url}?id=${id}`;   
-      return this.http.get < IVehicle[] > (newurl).pipe(catchError(this.handleError));  
+  // get all vehicle data    
+  getAllBodystyles(url: string): Observable < IBodystyle[] > {
+      return this.http.get < IBodystyle[] > (url).pipe(catchError(this.handleError));  
   }  
   // insert new vehicle details    
-  addVehicle(url: string, vehicle: ISaveVehicle): Observable < any > {  
-      return this.http.post(url, JSON.stringify(vehicle), httpOptions).pipe(catchError(this.handleError));  
+  addBodystyle(url: string, bodystyle: IBodystyle): Observable < any > {  
+      return this.http.post(url, JSON.stringify(bodystyle), httpOptions).pipe(catchError(this.handleError));  
   }  
   // update vehicle details    
-//   updateVehicle(url: string, id: number, vehicle: IVehicle): Observable < any > {  
-  updateVehicle(url: string, id: number, vehicle: ISaveVehicle): Observable < any > {  
+  updateBodystyle(url: string, id: number, bodystyle: IBodystyle): Observable < any > {  
       const newurl = `${url}?id=${id}`;  
-      return this.http.put(newurl, vehicle, httpOptions).pipe(catchError(this.handleError));  
+      return this.http.put(newurl, bodystyle, httpOptions).pipe(catchError(this.handleError));  
   }  
   // delete vehicle information    
-  deleteVehicle(url: string, id: number): Observable < any > {  
+  deleteBodystyle(url: string, id: number): Observable < any > {  
       const newurl = `${url}?id=${id}`; // DELETE api/contact?id=42    
       return this.http.delete(newurl, httpOptions).pipe(catchError(this.handleError));  
   }  
@@ -72,4 +60,6 @@ export class VehicleService {
       return throwError('Something bad happened; please try again later.');  
   }  
 } 
+
+
 

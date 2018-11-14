@@ -11,9 +11,8 @@ import { ContactformComponent } from './components/contactform/contactform.compo
 import { ContactlistComponent } from './components/contactlist/contactlist.component';
 import { VehiclelistComponent } from './components/vehiclelist/vehiclelist.component';
 import { VehicleformComponent } from './components/vehicleform/vehicleform.component';
-import { ContactService } from './services/contact.service';
-import { VehicleService } from './services/vehicle.service';
-import { BodystyleService } from './services/bodystyle.service';
+import { ContactService, VehicleService, BodystyleService } from './_services/';
+import { CmsComponent } from './components/cms/cms.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,8 @@ import { BodystyleService } from './services/bodystyle.service';
     ContactformComponent,
     ContactlistComponent,
     VehiclelistComponent,
-    VehicleformComponent
+    VehicleformComponent,
+    CmsComponent
   ],
   imports: [
     BrowserModule,

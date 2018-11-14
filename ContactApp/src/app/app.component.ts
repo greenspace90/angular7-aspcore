@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClient } from '@angular/common/http';
-import { IContact } from './model/contact';
-import { ContactService } from './services/contact.service';
-import { Global } from './shared/Global';
-
 
 @Component({
   selector: 'app-root',
