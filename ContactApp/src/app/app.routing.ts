@@ -21,7 +21,6 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cms', component: CmsComponent, canActivate: [AuthGuard] },
-
 ];
 
 // https://stackoverflow.com/questions/46771315/angular-cannot-get
