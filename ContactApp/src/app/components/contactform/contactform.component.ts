@@ -44,7 +44,7 @@ export class ContactformComponent implements OnInit {
       gender: ['', [Validators.required]],
       birth: ['', [Validators.required]],
       techno: ['', [Validators.required]],
-      message: ['', [Validators.required]]
+      role: ['', [Validators.required]]
     });
     this.genders = Global.genders;
     this.technologies = Global.technologies;
@@ -87,7 +87,7 @@ export class ContactformComponent implements OnInit {
     'gender': '',
     'birth': '',
     'techno': '',
-    'message': ''
+    'role': ''
   };
   // custom valdiation messages
   // tslint:disable-next-line:member-ordering
@@ -109,8 +109,8 @@ export class ContactformComponent implements OnInit {
     'birth': {
       'required': 'Birthday is required.'
     },
-    'message': {
-      'required': 'message is required.'
+    'role': {
+      'required': 'Role is required.'
     }
 
   };
