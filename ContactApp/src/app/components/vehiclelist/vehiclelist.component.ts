@@ -24,7 +24,7 @@ export class VehiclelistComponent implements OnInit {
   dbops: DBOperation;
   modalTitle: string;
   modalBtnTitle: string;
-  // id: number;
+  contactId: number;
 
   // set columns that will need to show in listing table
   displayedColumns = ['make', 'model', 'version', 'registration', 'bodystyle', 'action'];
@@ -36,12 +36,13 @@ export class VehiclelistComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    this.route.params.map(p => p.id).subscribe((contactId: number) => {
-      let id = contactId;
+    this.route.params.map(p => p.id).subscribe((id: number) => {
+      this.contactId = id;
+      // let id = contactId;
 
     this.loadingState = true;
-    if (id) {
-      this.loadVehicles(id);
+    if (this.contactId) {
+      this.loadVehicles(this.contactId);
     }
     else {
       this.loadAllVehicles();
@@ -67,10 +68,16 @@ export class VehiclelistComponent implements OnInit {
   }
 
   openDialog(id: number): void {
-    this.vehicle.contactId = id;
+    let vehicledata;
+    // Undefined when adding new Vehicle
+    if(this.vehicle !== undefined)
+    {
+      this.vehicle.contactId = id;
+      vehicledata = this.vehicle;
+    }
     const dialogRef = this.dialog.open(VehicleformComponent, {
       width: '500px',
-      data: { dbops: this.dbops, modalTitle: this.modalTitle, modalBtnTitle: this.modalBtnTitle, vehicle: this.vehicle }
+      data: { dbops: this.dbops, modalTitle: this.modalTitle, modalBtnTitle: this.modalBtnTitle, vehicle: vehicledata, contactId: this.contactId }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -97,11 +104,11 @@ export class VehiclelistComponent implements OnInit {
     });
   }
 
-  addVehicle(id: number) {
+  addVehicle() {
     this.dbops = DBOperation.create;
     this.modalTitle = 'Add New Vehicle';
     this.modalBtnTitle = 'Add';
-    this.openDialog(id);
+    this.openDialog(this.contactId);
   }
   editVehicle(id: number) {
     this.dbops = DBOperation.update;
