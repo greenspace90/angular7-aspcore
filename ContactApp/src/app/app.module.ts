@@ -4,15 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { Routing } from './app.routing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppMaterialModule } from './modules/app.material.module';
-import { ContactformComponent } from './components/contactform/contactform.component';
-import { ContactlistComponent } from './components/contactlist/contactlist.component';
-import { VehiclelistComponent } from './components/vehiclelist/vehiclelist.component';
-import { VehicleformComponent } from './components/vehicleform/vehicleform.component';
+import { ContactformComponent } from './components/contactform';
+import { ContactlistComponent } from './components/contactlist';
+import { VehiclelistComponent } from './components/vehiclelist';
+import { VehicleformComponent } from './components/vehicleform';
 import { ContactService, VehicleService, BodystyleService } from './_services/';
-import { CmsComponent } from './components/cms/cms.component';
+import { CmsComponent } from './components/cms';
+import { LoginComponent } from './components/login';
+import { RegisterComponent } from './components/register';
+import { AlertComponent } from './_components';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,10 @@ import { CmsComponent } from './components/cms/cms.component';
     ContactlistComponent,
     VehiclelistComponent,
     VehicleformComponent,
-    CmsComponent
+    CmsComponent,
+    AlertComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,9 @@ import { CmsComponent } from './components/cms/cms.component';
   providers: [
     ContactService,
     VehicleService,
-    BodystyleService
+    BodystyleService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
