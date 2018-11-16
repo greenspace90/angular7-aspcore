@@ -79,6 +79,7 @@ export class ContactformComponent implements OnInit {
       }
     }
   }
+
   // form errors model
   // tslint:disable-next-line:member-ordering
   formErrors = {

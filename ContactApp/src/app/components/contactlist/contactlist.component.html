@@ -4,7 +4,10 @@
   <ng-template class="contactlist" #contactlist>   -->
 <h2 style="text-align: center;">Contact List</h2>
 <div class="contactlist-container mat-elevation-z8">
-  <div><button title="Create" mat-raised-button color="accent" (click)="addContact()">Create</button></div>
+  <div>
+    <button title="Create" mat-raised-button color="accent" (click)="addContact()">Create</button>
+    <button title="Login" mat-raised-button color="accent" style="text-align:right !important" (click)="login()">Login</button>
+  </div>
   <table mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- Id Column -->
@@ -53,14 +56,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let element">
         <button title="Edit" mat-raised-button color="primary" (click)="editContact(element.contactId)">Edit</button>
-        <nav>
-          <!-- <a routerLink="['vehiclelist', element.contactId]" mat-raised-button color="primary">View -->
-          <a [routerLink]="['vehiclelist', element.contactId]" mat-raised-button color="primary">View
-          <!-- <a routerLink="vehiclelist" mat-raised-button color="primary">View -->
-            Vehicles
-          </a>
-        </nav>
-        <!-- <button title="viewVehicles" mat-raised-button color="primary" (click)="viewVehicles(element.contactId)">View Vehicles</button> -->
+        <a [routerLink]="['vehiclelist', element.contactId]" mat-raised-button color="primary">View Vehicles</a>
         <button title="Delete" mat-raised-button color="warn" (click)="deleteContact(element.contactId)">Delete</button>
       </td>
     </ng-container>

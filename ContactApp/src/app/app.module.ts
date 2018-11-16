@@ -11,11 +11,11 @@ import { ContactformComponent } from './components/contactform';
 import { ContactlistComponent } from './components/contactlist';
 import { VehiclelistComponent } from './components/vehiclelist';
 import { VehicleformComponent } from './components/vehicleform';
-import { ContactService, VehicleService, BodystyleService } from './_services/';
 import { CmsComponent } from './components/cms';
 import { LoginComponent } from './components/login';
 import { RegisterComponent } from './components/register';
 import { AlertComponent } from './_components';
+import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 @NgModule({
@@ -44,6 +44,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     ContactService,
     VehicleService,
     BodystyleService,
+    AuthenticationService,
+    UserService,
+    AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
