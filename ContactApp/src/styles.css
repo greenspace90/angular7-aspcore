@@ -11,3 +11,7 @@ table {
     padding: 0 13px !important;
     margin: 5px !important;
 }
+
+.centre {
+    text-align: center;
+}
