@@ -84,27 +84,6 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    // onSubmit() {
-    //     this.submitted = true;
-
-    //     // stop here if form is invalid
-    //     if (this.loginForm.invalid) {
-    //         return;
-    //     }
-
-    //     this.loading = true;
-    //     this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //         .pipe(first())
-    //         .subscribe(
-    //             data => {
-    //                 this.router.navigate([this.returnUrl]);
-    //             },
-    //             error => {
-    //                 this.alertService.error(error);
-    //                 this.loading = false;
-    //             });
-    // }
-
     login() {
         this.submitted = true;
 
@@ -118,7 +97,9 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    // this.router.navigate([this.returnUrl]);
+                    this.router.navigate(['cms']);
+                    this.dialogRef.close();
                 },
                 error => {
                     this.alertService.error(error);
@@ -134,27 +115,4 @@ export class LoginComponent implements OnInit {
         // ).subscribe();
         this.dialogRef.close();
     }
-
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     console.log('The dialog was closed');
-    //     if (result === 'success') {
-    //       this.loadingState = true;
-    //       this.loadVehicles(id);
-    //       switch (this.dbops) {
-    //         case DBOperation.create:
-    //           this.showMessage('Data successfully added.');
-    //           break;
-    //         case DBOperation.update:
-    //           this.showMessage('Data successfully updated.');
-    //           break;
-    //         case DBOperation.delete:
-    //           this.showMessage('Data successfully deleted.');
-    //           break;
-    //       }
-    //     } else if (result === 'error') {
-    //       this.showMessage('There is some issue in saving records, please contact to system administrator!');
-    //     } else {
-    //       // this.showMessage('Please try again, something went wrong');
-    //     }
-    //   });
 }
