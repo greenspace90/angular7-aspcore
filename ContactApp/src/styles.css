@@ -15,3 +15,8 @@ table {
 .centre {
     text-align: center;
 }
+
+.form-left {
+    position: absolute;
+    left:20px;
+}

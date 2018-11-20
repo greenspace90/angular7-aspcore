@@ -1,0 +1,13 @@
+.mat-form-field.no-bottom-margin > .mat-form-field-wrapper {
+    margin-bottom: -1.25em !important;
+  }
+
+.mat-form-field.no-infix-border > .mat-form-field-infix {
+padding: 0;
+  }
+
+.mat-form-field.no-outline-border > .mat-form-field-appearance-outline {
+    padding: 0;
+  }
+
+        

@@ -28,20 +28,20 @@ const httpOptions = {
 @Injectable()  
 export class BodystyleService {  
   constructor(private http: HttpClient) {}  
-  // get all vehicle data    
+  // get all bodystyle data    
   getAllBodystyles(url: string): Observable < IBodystyle[] > {
       return this.http.get < IBodystyle[] > (url).pipe(catchError(this.handleError));  
   }  
-  // insert new vehicle details    
+  // insert new bodystyle details    
   addBodystyle(url: string, bodystyle: IBodystyle): Observable < any > {  
       return this.http.post(url, JSON.stringify(bodystyle), httpOptions).pipe(catchError(this.handleError));  
   }  
-  // update vehicle details    
+  // update bodystyle details    
   updateBodystyle(url: string, id: number, bodystyle: IBodystyle): Observable < any > {  
       const newurl = `${url}?id=${id}`;  
       return this.http.put(newurl, bodystyle, httpOptions).pipe(catchError(this.handleError));  
   }  
-  // delete vehicle information    
+  // delete bodystyle information    
   deleteBodystyle(url: string, id: number): Observable < any > {  
       const newurl = `${url}?id=${id}`; // DELETE api/contact?id=42    
       return this.http.delete(newurl, httpOptions).pipe(catchError(this.handleError));  

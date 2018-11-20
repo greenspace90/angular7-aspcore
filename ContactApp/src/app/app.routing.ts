@@ -11,6 +11,7 @@ import { ContactlistComponent } from '@components/contactlist';
 import { ContactformComponent } from '@components/contactform';
 import { VehiclelistComponent } from '@components/vehiclelist';
 import { VehicleformComponent } from '@components/vehicleform';
+import { BodystylesComponent } from '@components/bodystyles';
 
 const appRoutes: Routes = [
   { path: '',  pathMatch: 'full' , component: ContactlistComponent },
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cms', component: CmsComponent, canActivate: [AuthGuard] },
+  { path: 'bodystyle', component: BodystylesComponent, canActivate: [AuthGuard] },
 ];
 
 // https://stackoverflow.com/questions/46771315/angular-cannot-get

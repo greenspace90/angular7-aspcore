@@ -67,16 +67,16 @@ export class ContactlistComponent implements OnInit {
     });
   }
 
-  login(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      width: '500px'
-    });
+  // login(): void {
+  //   const dialogRef = this.dialog.open(LoginComponent, {
+  //     width: '500px'
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.loadingState = true;
-      this.loadContacts();
-    });
-  };
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.loadingState = true;
+  //     this.loadContacts();
+  //   });
+  // };
 
   loadContacts(): void {
     this._contactService.getAllContacts(Global.BASE_USER_ENDPOINT + 'getAllContacts')

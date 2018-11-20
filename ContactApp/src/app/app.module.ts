@@ -14,6 +14,7 @@ import { VehicleformComponent } from './components/vehicleform';
 import { CmsComponent } from './components/cms';
 import { LoginComponent } from './components/login';
 import { RegisterComponent } from './components/register';
+import { BodystylesComponent } from './components/bodystyles';
 import { AlertComponent } from './_components';
 import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -28,7 +29,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     CmsComponent,
     AlertComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BodystylesComponent
   ],
   imports: [
     BrowserModule,
