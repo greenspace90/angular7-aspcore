@@ -24,9 +24,11 @@ export class BodystylesComponent implements OnInit {
   modalTitle: string;
   modalBtnTitle: string;
   showBodystyleInput: boolean = false;
+  showCreateBodystyleInput: boolean = false;
   saveBodystyle: IBodystyle;
   bodystyleFrm: FormGroup;
   currentTypeId: number;
+  newBodystyle: IBodystyle;
 
   // set columns that will need to show in listing table
   displayedColumns = ['name', 'action'];
@@ -39,6 +41,7 @@ export class BodystylesComponent implements OnInit {
 
   ngOnInit() {
     this.bodystyleFrm = this.fb.group({
+      typeId: [''],
       name: ['', [Validators.required, Validators.maxLength(50)]]
       // showBodystyleInput: [this.showBodystyleInput]
     });
@@ -121,11 +124,12 @@ export class BodystylesComponent implements OnInit {
       });
   }
 
-  addBodystyle() {
-    this.dbops = DBOperation.create;
-    this.modalTitle = 'Add New Contact';
-    this.modalBtnTitle = 'Add';
-    this.openDialog();
+  createBodystyle() {
+    this.showCreateBodystyleInput = true;
+    // this.dbops = DBOperation.create;
+    // this.modalTitle = 'Add New Contact';
+    // this.modalBtnTitle = 'Add';
+    // this.openDialog();
   }
   editBodystyle(typeId: number) {
     // this.dbops = DBOperation.update;
@@ -166,10 +170,38 @@ export class BodystylesComponent implements OnInit {
     this.openDialog();
   }
 
-  cancel() {
+  cancelEditBodystyle() {
     this.bodystyleFrm.reset();
     this.showBodystyleInput = false;
   }
+
+  cancelAddBodystyle() {
+    this.bodystyleFrm.reset();
+    this.showCreateBodystyleInput = false;
+  }
+
+  addBodystyle(formData: any) {
+    this.newBodystyle = formData.value; 
+    this._bodystyleService.addBodystyle('api/bodystyle/addBodystyle', this.newBodystyle).subscribe(
+      data => {
+        // Success
+        if (data.message) {
+          this.showMessage("Bodystyle added successfully");
+          this.loadBodystyles();
+        } else {
+          this.showMessage("Unable to add Bodystyle");
+        }
+        this.bodystyleFrm.reset();
+        this.showCreateBodystyleInput = false;
+      },
+      error => {
+        this.showMessage("Unable to add Bodystyle");
+      }
+    );
+
+  }
+
+
 
   showMessage(msg: string) {
     this.snackBar.open(msg, '', {

@@ -21,7 +21,7 @@ namespace contact_app.Controllers
         [Route("getAllBodystyles")]  
         public IEnumerable < Bodystyle > GetAll() {  
                 // fetch all bodystyle records  
-                return _context.Bodystyles.ToList();  
+                return _context.Bodystyles.OrderBy(n => n.name).ToList();  
             }
 
         [HttpGet("{id}")]  
