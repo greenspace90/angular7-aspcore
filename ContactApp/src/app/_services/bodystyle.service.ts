@@ -20,6 +20,9 @@ import {
 import {  
   IBodystyle
 } from '../_models/bodystyle';  
+import {  
+  IBodystyledelete
+} from '../_models/bodystyledelete';  
 const httpOptions = {  
   headers: new HttpHeaders({  
       'Content-Type': 'application/json'  
@@ -29,8 +32,8 @@ const httpOptions = {
 export class BodystyleService {  
   constructor(private http: HttpClient) {}  
   // get all bodystyle data    
-  getAllBodystyles(url: string): Observable < IBodystyle[] > {
-      return this.http.get < IBodystyle[] > (url).pipe(catchError(this.handleError));  
+  getAllBodystyles(url: string): Observable < IBodystyledelete[] > {
+      return this.http.get < IBodystyledelete[] > (url).pipe(catchError(this.handleError));  
   }  
   // insert new bodystyle details    
   addBodystyle(url: string, bodystyle: IBodystyle): Observable < any > {  

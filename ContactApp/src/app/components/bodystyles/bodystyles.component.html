@@ -43,7 +43,7 @@
             (click)="updateBodystyle(bodystyleFrm, element.typeId)">Update</button>
           <button *ngIf="showBodystyleInput && element.typeId == currentTypeId" title="Cancel" mat-raised-button color="primary"
             (click)="cancelEditBodystyle()">Cancel</button>
-          <button title="Delete" mat-raised-button color="warn" (click)="deleteBodystyle(element.typeId)">Delete</button>
+          <button title="Delete" mat-raised-button color="warn" [disabled] ="element.disableDelete" (click)="deleteBodystyle(element.typeId)">Delete</button>
         </td>
       </ng-container>
 

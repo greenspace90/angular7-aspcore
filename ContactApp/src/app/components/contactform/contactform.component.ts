@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
 
-import { ContactlistComponent } from '../contactlist/contactlist.component';
+import { ContactlistComponent } from '../contactlist';
 
 import { IContact } from '@app/_models/';
 import { ContactService } from '@app/_services/';
