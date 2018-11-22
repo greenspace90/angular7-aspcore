@@ -15,6 +15,7 @@ import { CmsComponent } from './components/cms';
 import { LoginComponent } from './components/login';
 import { RegisterComponent } from './components/register';
 import { BodystylesComponent } from './components/bodystyles';
+import { DeleteconfirmComponent } from './components/deleteconfirm';
 import { AlertComponent } from './_components';
 import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -30,7 +31,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     AlertComponent,
     LoginComponent,
     RegisterComponent,
-    BodystylesComponent
+    BodystylesComponent,
+    DeleteconfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents:[DeleteconfirmComponent]
 })
 export class AppModule { }

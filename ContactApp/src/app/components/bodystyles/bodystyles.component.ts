@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSnackBar, MatSort } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
+import {DeleteconfirmComponent} from '../deleteconfirm';
 import { BodystyleService } from '@app/_services/';
 import { IBodystyle } from '@app/_models/';
 import { DBOperation } from '@app/shared/DBOperation';
@@ -42,7 +42,8 @@ export class BodystylesComponent implements OnInit {
   ngOnInit() {
     this.bodystyleFrm = this.fb.group({
       typeId: [''],
-      name: ['', [Validators.required, Validators.maxLength(50)]]
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      disableDelete: ['']
       // showBodystyleInput: [this.showBodystyleInput]
     });
     // subscribe on value changed event of form to show validation message
@@ -87,33 +88,23 @@ export class BodystylesComponent implements OnInit {
   };
 
   openDialog(): void {
-    // const dialogRef = this.dialog.open(ContactformComponent, {
-    //   width: '500px',
-    //   data: { dbops: this.dbops, modalTitle: this.modalTitle, modalBtnTitle: this.modalBtnTitle, contact: this.bodystyle }
-    // });
+    const dialogRef = this.dialog.open(DeleteconfirmComponent, {
+      width: '500px',
+      data: { modalTitle: this.modalTitle, modalBtnTitle: this.modalBtnTitle, bodystyle: this.bodystyle }
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   if (result === 'success') {
-    //     this.loadingState = true;
-    //     this.loadBodystyles();
-    //     switch (this.dbops) {
-    //       case DBOperation.create:
-    //         this.showMessage('Data successfully added.');
-    //         break;
-    //       case DBOperation.update:
-    //         this.showMessage('Data successfully updated.');
-    //         break;
-    //       case DBOperation.delete:
-    //         this.showMessage('Data successfully deleted.');
-    //         break;
-    //     }
-    //   } else if (result === 'error') {
-    //     this.showMessage('There is some issue in saving records, please contact to system administrator!');
-    //   } else {
-    //     // this.showMessage('Please try again, something went wrong');
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result === 'success') {
+        this.loadingState = true;
+        this.loadBodystyles();
+        this.showMessage('Data successfully deleted.');
+      } else if (result === 'error') {
+        this.showMessage('There is some issue in saving records, please contact to system administrator!');
+      } else {
+        // this.showMessage('Please try again, something went wrong');
+      }
+    });
   }
 
   loadBodystyles(): void {
@@ -126,17 +117,8 @@ export class BodystylesComponent implements OnInit {
 
   createBodystyle() {
     this.showCreateBodystyleInput = true;
-    // this.dbops = DBOperation.create;
-    // this.modalTitle = 'Add New Contact';
-    // this.modalBtnTitle = 'Add';
-    // this.openDialog();
   }
   editBodystyle(typeId: number) {
-    // this.dbops = DBOperation.update;
-    // this.modalTitle = 'Edit Contact';
-    // this.modalBtnTitle = 'Update';
-    // this.bodystyle = this.dataSource.data.filter(x => x.typeId === typeId)[0];
-    // this.openDialog();
     this.showBodystyleInput = true;
     this.currentTypeId = typeId;
   }
@@ -159,15 +141,27 @@ export class BodystylesComponent implements OnInit {
         this.showMessage("Unable to update Bodystyle");
       }
     );
-
   }
 
-  deleteContact(typeId: number) {
-    this.dbops = DBOperation.delete;
-    this.modalTitle = 'Confirm Delete?';
-    this.modalBtnTitle = 'Delete';
+  deleteBodystyle(typeId: number) {
     this.bodystyle = this.dataSource.data.filter(x => x.typeId === typeId)[0];
-    this.openDialog();
+    const dialogRef = this.dialog.open(DeleteconfirmComponent, {
+      width: '500px',
+      data: { modalTitle: 'Confirm Delete?', modalBtnTitle: 'Delete', bodystyle: this.bodystyle }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result === 'success') {
+        this.loadingState = true;
+        this.loadBodystyles();
+        this.showMessage('Data successfully deleted.');
+      } else if (result === 'error') {
+        this.showMessage('There is some issue in saving records, please contact to system administrator!');
+      } else {
+        // this.showMessage('Please try again, something went wrong');
+      }
+    });
   }
 
   cancelEditBodystyle() {
