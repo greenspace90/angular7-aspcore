@@ -103,6 +103,7 @@ namespace angular7_aspcore
             }
             else
             {
+                app.UseMiddleware<ExceptionHandler>();
                 app.UseHsts();
             }
 
