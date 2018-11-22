@@ -2,7 +2,7 @@ using AutoMapper;
 using angular7_aspcore.Models;
 using DTO = angular7_aspcore.Models.DTOs;
 
-namespace angular7_aspcore
+namespace angular7_aspcore.AutoMapper.Profiles
 {
     public class UserProfile : Profile
     {
