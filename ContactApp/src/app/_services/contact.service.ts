@@ -18,31 +18,31 @@ import {
   catchError  
 } from 'rxjs/operators';  
 import {  
-  IBodystyle
-} from '../model/bodystyle';  
+  IContact  
+} from '../_models/contact';  
 const httpOptions = {  
   headers: new HttpHeaders({  
       'Content-Type': 'application/json'  
   })  
 };  
 @Injectable()  
-export class BodystyleService {  
+export class ContactService {  
   constructor(private http: HttpClient) {}  
-  // get all vehicle data    
-  getAllBodystyles(url: string): Observable < IBodystyle[] > {
-      return this.http.get < IBodystyle[] > (url).pipe(catchError(this.handleError));  
+  // get all contact data    
+  getAllContacts(url: string): Observable < IContact[] > {  
+      return this.http.get < IContact[] > (url).pipe(catchError(this.handleError));  
   }  
-  // insert new vehicle details    
-  addBodystyle(url: string, bodystyle: IBodystyle): Observable < any > {  
-      return this.http.post(url, JSON.stringify(bodystyle), httpOptions).pipe(catchError(this.handleError));  
+  // insert new contact details    
+  addContact(url: string, contact: IContact): Observable < any > {  
+      return this.http.post(url, JSON.stringify(contact), httpOptions).pipe(catchError(this.handleError));  
   }  
-  // update vehicle details    
-  updateBodystyle(url: string, id: number, bodystyle: IBodystyle): Observable < any > {  
+  // update contact details    
+  updateContact(url: string, id: number, contact: IContact): Observable < any > {  
       const newurl = `${url}?id=${id}`;  
-      return this.http.put(newurl, bodystyle, httpOptions).pipe(catchError(this.handleError));  
+      return this.http.put(newurl, contact, httpOptions).pipe(catchError(this.handleError));  
   }  
-  // delete vehicle information    
-  deleteBodystyle(url: string, id: number): Observable < any > {  
+  // delete contact information    
+  deleteContact(url: string, id: number): Observable < any > {  
       const newurl = `${url}?id=${id}`; // DELETE api/contact?id=42    
       return this.http.delete(newurl, httpOptions).pipe(catchError(this.handleError));  
   }  
@@ -60,6 +60,3 @@ export class BodystyleService {
       return throwError('Something bad happened; please try again later.');  
   }  
 } 
-
-
-

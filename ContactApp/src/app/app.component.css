@@ -1,0 +1,19 @@
+.login {
+    position: absolute;
+    right: 100px;
+}
+.logout {
+    position: absolute;
+    right: 20px;
+}
+.login,.logout {
+    top: 16px;
+}
+div.centre-text {
+    text-align: center;
+}
+h1.background-colour {
+    background-color: #cec1c13b;
+    margin: 0px;
+    padding: 21.440px;
+}

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClient } from '@angular/common/http';
-import { IContact } from './model/contact';
-import { ContactService } from './services/contact.service';
-import { Global } from './shared/Global';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AlertService, AuthenticationService } from '@app/_services';
+import { Router, ActivatedRoute } from '@angular/router';
 
+
+import { LoginComponent } from '@app/components/login';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,34 @@ import { Global } from './shared/Global';
 })
 export class AppComponent implements OnInit {
   title = 'ContactApp';
-  constructor(private http:HttpClient){
-  }
+
+  constructor(
+    private http:HttpClient, 
+    private dialog: MatDialog,
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute,
+    private router: Router){ }
+
   ngOnInit(): void {
     this.http.get('/api/contact').subscribe(data=> {
       console.log(data);
     });
+  }
+
+  login(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '300px'
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.loadingState = true;
+    //   this.loadContacts();
+    // });
+  };
+
+  logOut() {
+    this.authenticationService.logout();
+    this.router.navigate(['']);
   }
 
 // export class AppComponent implements OnInit {

@@ -4,16 +4,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { Routing } from './app.routing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppMaterialModule } from './modules/app.material.module';
-import { ContactformComponent } from './components/contactform/contactform.component';
-import { ContactlistComponent } from './components/contactlist/contactlist.component';
-import { VehiclelistComponent } from './components/vehiclelist/vehiclelist.component';
-import { VehicleformComponent } from './components/vehicleform/vehicleform.component';
-import { ContactService } from './services/contact.service';
-import { VehicleService } from './services/vehicle.service';
-import { BodystyleService } from './services/bodystyle.service';
+import { ContactformComponent } from './components/contactform';
+import { ContactlistComponent } from './components/contactlist';
+import { VehiclelistComponent } from './components/vehiclelist';
+import { VehicleformComponent } from './components/vehicleform';
+import { CmsComponent } from './components/cms';
+import { LoginComponent } from './components/login';
+import { RegisterComponent } from './components/register';
+import { BodystylesComponent } from './components/bodystyles';
+import { DeleteconfirmComponent } from './components/deleteconfirm';
+import { AlertComponent } from './_components';
+import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,13 @@ import { BodystyleService } from './services/bodystyle.service';
     ContactformComponent,
     ContactlistComponent,
     VehiclelistComponent,
-    VehicleformComponent
+    VehicleformComponent,
+    CmsComponent,
+    AlertComponent,
+    LoginComponent,
+    RegisterComponent,
+    BodystylesComponent,
+    DeleteconfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +47,14 @@ import { BodystyleService } from './services/bodystyle.service';
   providers: [
     ContactService,
     VehicleService,
-    BodystyleService
+    BodystyleService,
+    AuthenticationService,
+    UserService,
+    AlertService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents:[DeleteconfirmComponent]
 })
 export class AppModule { }

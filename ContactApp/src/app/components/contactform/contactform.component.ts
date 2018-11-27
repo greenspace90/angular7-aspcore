@@ -4,10 +4,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
 
-import { ContactlistComponent } from '../contactlist/contactlist.component';
+import { ContactlistComponent } from '../contactlist';
 
-import { IContact } from '@app/model/contact';
-import { ContactService } from '@app/services/contact.service';
+import { IContact } from '@app/_models/';
+import { ContactService } from '@app/_services/';
 import { DBOperation } from '@app/shared/DBOperation';
 import { Global } from '@app/shared/Global';
 
@@ -44,7 +44,7 @@ export class ContactformComponent implements OnInit {
       gender: ['', [Validators.required]],
       birth: ['', [Validators.required]],
       techno: ['', [Validators.required]],
-      message: ['', [Validators.required]]
+      role: ['', [Validators.required]]
     });
     this.genders = Global.genders;
     this.technologies = Global.technologies;
@@ -79,6 +79,7 @@ export class ContactformComponent implements OnInit {
       }
     }
   }
+
   // form errors model
   // tslint:disable-next-line:member-ordering
   formErrors = {
@@ -87,7 +88,7 @@ export class ContactformComponent implements OnInit {
     'gender': '',
     'birth': '',
     'techno': '',
-    'message': ''
+    'role': ''
   };
   // custom valdiation messages
   // tslint:disable-next-line:member-ordering
@@ -109,8 +110,8 @@ export class ContactformComponent implements OnInit {
     'birth': {
       'required': 'Birthday is required.'
     },
-    'message': {
-      'required': 'message is required.'
+    'role': {
+      'required': 'Role is required.'
     }
 
   };

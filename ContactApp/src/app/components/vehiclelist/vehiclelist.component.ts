@@ -1,14 +1,10 @@
-import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSnackBar, MatSort } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
-import { VehicleformComponent } from '@components/vehicleform/vehicleform.component';
-import { VehicleService } from '@app/services/vehicle.service';
-import { IVehicle } from '@app/model/vehicle';
+import { MatTableDataSource, MatSnackBar, MatSort, MatDialog } from '@angular/material';
+import { VehicleformComponent } from '@components/vehicleform';
+import { VehicleService } from '@app/_services';
+import { IVehicle } from '@app/_models';
 import { DBOperation } from '@app/shared/DBOperation';
-import { Global } from '@app/shared/Global';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

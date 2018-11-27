@@ -66,6 +66,27 @@ namespace angular7_aspcore.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Type");
                 });
 
+            modelBuilder.Entity("angular7_aspcore.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<byte[]>("PasswordHash");
+
+                    b.Property<byte[]>("PasswordSalt");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("angular7_aspcore.Models.Vehicle", b =>
                 {
                     b.Property<long?>("vehicleId")

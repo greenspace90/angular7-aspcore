@@ -1,17 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
-
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
-
-import { VehiclelistComponent } from '../vehiclelist/vehiclelist.component';
-
-import { ISaveVehicle} from '@app/model/savevehicle';
-import { VehicleService } from '@app/services/vehicle.service';
-import { BodystyleService } from '@app/services/bodystyle.service';
+import { VehiclelistComponent } from '@components/vehiclelist';
+import { VehicleService, BodystyleService } from '@app/_services/';
 import { DBOperation } from '@app/shared/DBOperation';
-import { Global } from '@app/shared/Global';
-import { IVehicle } from '@app/model/vehicle';
+import { IVehicle } from '@app/_models/';
 
 @Component({
   selector: 'app-vehicleform',
@@ -23,14 +17,8 @@ export class VehicleformComponent implements OnInit {
   msg: string;
   indLoading = false;
   vehicleFrm: FormGroup;
-  // dbops: DBOperation;
-  // modalTitle: string;
-  // modalBtnTitle: string;
   listFilter: string;
   selectedOption: string;
-  // contact: IContact;
-  // genders = [];
-  // technologies = [];
   bodystyles = [];
   savevehicle: IVehicle;
 
@@ -53,8 +41,6 @@ export class VehicleformComponent implements OnInit {
       typeId: [''],
       bodystyle: ['']
     });
-    // this.genders = Global.genders;
-    // this.technologies = Global.technologies;
 
     this._bodystyleService.getAllBodystyles('api/bodystyle/getAllBodystyles')
     .subscribe(styles => {
@@ -158,7 +144,7 @@ export class VehicleformComponent implements OnInit {
         );
         break;
       case DBOperation.delete:
-        this._vehicleService.deleteVehicle('api/vehicle/deleteVehicle', formData.vehicleId).subscribe(
+        this._vehicleService.deleteVehicle('api/vehicle/deleteVehicle', this.data.vehicle.vehicleId).subscribe(
           data => {
             // Success
             if (data.message) {

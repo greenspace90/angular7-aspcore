@@ -2,10 +2,11 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSnackBar, MatSort } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { ContactformComponent } from '../contactform/contactform.component';
+import { ContactformComponent } from '../contactform';
+import { LoginComponent } from '../login';
 
-import { ContactService } from '@app/services/contact.service';
-import { IContact } from '@app/model/contact';
+import { ContactService } from '@app/_services/';
+import { IContact } from '@app/_models/';
 import { DBOperation } from '@app/shared/DBOperation';
 import { Global } from '@app/shared/Global';
 
@@ -34,7 +35,7 @@ export class ContactlistComponent implements OnInit {
   ngOnInit() {
     this.loadingState = true;
     this.loadContacts();
-    this.dataSource.sort = this.sort;    
+    this.dataSource.sort = this.sort;
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(ContactformComponent, {
@@ -61,10 +62,21 @@ export class ContactlistComponent implements OnInit {
       } else if (result === 'error') {
         this.showMessage('There is some issue in saving records, please contact to system administrator!');
       } else {
-       // this.showMessage('Please try again, something went wrong');
+        // this.showMessage('Please try again, something went wrong');
       }
     });
   }
+
+  // login(): void {
+  //   const dialogRef = this.dialog.open(LoginComponent, {
+  //     width: '500px'
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.loadingState = true;
+  //     this.loadContacts();
+  //   });
+  // };
 
   loadContacts(): void {
     this._contactService.getAllContacts(Global.BASE_USER_ENDPOINT + 'getAllContacts')

@@ -1,6 +1,4 @@
-import { IContact } from '@app/model/contact';
-import { IBodystyle } from '@app/model/bodystyle';
-import { BodystyleService } from '@app/services/bodystyle.service';
+import { IBodystyle } from '@app/_models/bodystyle';
 
 export interface IVehicle {
     vehicleId: number;
