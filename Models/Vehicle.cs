@@ -45,5 +45,18 @@ namespace angular7_aspcore.Models
             get;
             set;
         }  
+        public decimal purchasePrice {  
+            get;  
+            set;  
+        }
+        public long ownershipPeriod {  
+            get;  
+            set;  
+        }
+        public decimal residualValue {  
+            get;  
+            set;  
+        }
+
     }
 }

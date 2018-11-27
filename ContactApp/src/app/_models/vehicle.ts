@@ -9,4 +9,7 @@ export interface IVehicle {
     contactId: number;
     typeId: number;
     bodystyle: IBodystyle;
+    purchasePrice: number;
+    ownershipPeriod: number;
+    residualValue: number;
 }

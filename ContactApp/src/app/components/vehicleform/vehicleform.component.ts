@@ -35,17 +35,20 @@ export class VehicleformComponent implements OnInit {
       make: ['', [Validators.required]],
       model: ['', [Validators.required]],
       version: ['', [Validators.required]],
-      registration: ['', [Validators.required]], 
+      registration: ['', [Validators.required]],
       contactId: [''],
       contact: [''],
       typeId: [''],
-      bodystyle: ['']
+      bodystyle: [''],
+      purchasePrice: ['', [Validators.required]],
+      ownershipPeriod: ['', [Validators.required]],
+      residualValue: ['', [Validators.required]]
     });
 
     this._bodystyleService.getAllBodystyles('api/bodystyle/getAllBodystyles')
-    .subscribe(styles => {
-      this.bodystyles = styles;
-    });
+      .subscribe(styles => {
+        this.bodystyles = styles;
+      });
 
     // subscribe on value changed event of form to show validation message
     this.vehicleFrm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -83,8 +86,11 @@ export class VehicleformComponent implements OnInit {
     'make': '',
     'model': '',
     'version': '',
-    'registration': '',  
-    'typeId': ''  
+    'registration': '',
+    'typeId': '',
+    'purchasePrice': '',
+    'ownershipPeriod': '',
+    'residualValue': ''
   };
   // custom valdiation messages
   // tslint:disable-next-line:member-ordering
@@ -104,13 +110,22 @@ export class VehicleformComponent implements OnInit {
     'typeId': {
       'required': 'Bodystyle is required.'
     },
+    'purchasePrice': {
+      'required': 'Purchase Price is required.'
+    },
+    'ownershipPeriod': {
+      'required': 'Ownership Period is required.'
+    },
+    'residualValue': {
+      'required': 'Residual Value is required.'
+    }
   };
 
   onSubmit(formData: any) {
     switch (this.data.dbops) {
       case DBOperation.create:
-      this.savevehicle = formData.value;
-      this.savevehicle.contactId = this.data.contactId;
+        this.savevehicle = formData.value;
+        this.savevehicle.contactId = this.data.contactId;
 
         // this._vehicleService.addVehicle('api/vehicle/addVehicle', formData).subscribe(
         this._vehicleService.addVehicle('api/vehicle/addVehicle', this.savevehicle).subscribe(

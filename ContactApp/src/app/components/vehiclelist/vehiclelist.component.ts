@@ -23,7 +23,7 @@ export class VehiclelistComponent implements OnInit {
   contactId: number;
 
   // set columns that will need to show in listing table
-  displayedColumns = ['make', 'model', 'version', 'registration', 'bodystyle', 'action'];
+  displayedColumns = ['make', 'model', 'version', 'registration', 'bodystyle', 'purchasePrice', 'ownershipPeriod', 'residualValue', 'action'];
   // setting up datasource for material table
   dataSource = new MatTableDataSource<IVehicle>();
 
