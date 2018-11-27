@@ -9,7 +9,9 @@ export interface IVehicle {
     contactId: number;
     typeId: number;
     bodystyle: IBodystyle;
+    purchaseDate: string;
     purchasePrice: number;
     ownershipPeriod: number;
     residualValue: number;
+    currentValue: number;
 }

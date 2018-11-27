@@ -19,6 +19,9 @@ import { DeleteconfirmComponent } from './components/deleteconfirm';
 import { AlertComponent } from './_components';
 import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material';
+import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDatepickerModule, // provides moment date adapter
+    MatMomentDateModule,
     LayoutModule,
     Routing
   ],
@@ -52,7 +57,11 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     UserService,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MomentUtcDateAdapter },
+    // { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent],
   // entryComponents:[DeleteconfirmComponent]
