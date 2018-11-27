@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AlertService, AuthenticationService } from '@app/_services';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 import { LoginComponent } from '@app/components/login';
 
@@ -12,7 +15,12 @@ import { LoginComponent } from '@app/components/login';
 export class AppComponent implements OnInit {
   title = 'ContactApp';
 
-  constructor(private http:HttpClient, private dialog: MatDialog){ }
+  constructor(
+    private http:HttpClient, 
+    private dialog: MatDialog,
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute,
+    private router: Router){ }
 
   ngOnInit(): void {
     this.http.get('/api/contact').subscribe(data=> {
@@ -30,6 +38,12 @@ export class AppComponent implements OnInit {
     //   this.loadContacts();
     // });
   };
+
+  logOut() {
+    this.authenticationService.logout();
+    this.router.navigate(['']);
+  }
+
 // export class AppComponent implements OnInit {
 //   title = 'ContactApp';
 //   constructor(private http:HttpClient, private service: ContactService){

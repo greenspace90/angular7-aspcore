@@ -144,7 +144,7 @@ export class VehicleformComponent implements OnInit {
         );
         break;
       case DBOperation.delete:
-        this._vehicleService.deleteVehicle('api/vehicle/deleteVehicle', formData.vehicleId).subscribe(
+        this._vehicleService.deleteVehicle('api/vehicle/deleteVehicle', this.data.vehicle.vehicleId).subscribe(
           data => {
             // Success
             if (data.message) {

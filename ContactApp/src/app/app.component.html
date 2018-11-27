@@ -1,5 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar>
-  <span>Contact Application<button class="right-align" title="Login" mat-raised-button color="accent" (click)="login()">Login</button></span>
-</mat-toolbar>
+<!-- <mat-toolbar style="justify-content: center;"> -->
+<!-- <mat-toolbar class="centre-text"> -->
+  <span>
+    <div class="centre-text">
+      <h1 class="background-colour">Contact Application</h1>
+    </div>
+    <div><button class="login" title="Login" mat-raised-button color="accent" (click)="login()">Login</button></div>
+    <div><button class="logout" title="Logout" mat-raised-button color="accent" (click)="logOut()">Log Out</button></div>
+  </span>
+<!-- </mat-toolbar> -->
 <router-outlet></router-outlet>
