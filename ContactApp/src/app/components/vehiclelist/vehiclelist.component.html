@@ -33,20 +33,26 @@
       <td mat-cell *matCellDef="let element"> {{element.bodystyle.name}} </td>
     </ng-container>
 
-    <!-- Bodystyle Column -->
+    <!-- Purchase Date Column -->
+    <ng-container matColumnDef="purchaseDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.purchaseDate | date: 'dd-MM-yyyy' }} </td>
+    </ng-container>
+    
+    <!-- Purchase Price Column -->
     <ng-container matColumnDef="purchasePrice">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase Price </th>
       <td mat-cell *matCellDef="let element"> {{ element.purchasePrice | currency:'GBP' }} </td>
       <!-- <td mat-cell *matCellDef="let element"> {{ element.purchasePrice | currency:'CURRENCY' }} </td> -->
     </ng-container>
 
-    <!-- Bodystyle Column -->
+    <!-- Ownership Period Column -->
     <ng-container matColumnDef="ownershipPeriod">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Ownership Period </th>
       <td mat-cell *matCellDef="let element"> {{element.ownershipPeriod}} </td>
     </ng-container>
 
-    <!-- Bodystyle Column -->
+    <!-- Residual Value Column -->
     <ng-container matColumnDef="residualValue">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Residual Value </th>
       <td mat-cell *matCellDef="let element"> {{element.residualValue | currency:'GBP'}} </td>

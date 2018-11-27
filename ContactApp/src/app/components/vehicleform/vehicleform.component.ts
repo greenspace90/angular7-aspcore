@@ -40,6 +40,7 @@ export class VehicleformComponent implements OnInit {
       contact: [''],
       typeId: [''],
       bodystyle: [''],
+      purchaseDate: ['', [Validators.required]],
       purchasePrice: ['', [Validators.required]],
       ownershipPeriod: ['', [Validators.required]],
       residualValue: ['', [Validators.required]]
@@ -88,6 +89,7 @@ export class VehicleformComponent implements OnInit {
     'version': '',
     'registration': '',
     'typeId': '',
+    'purchaseDate': '',
     'purchasePrice': '',
     'ownershipPeriod': '',
     'residualValue': ''
@@ -110,6 +112,9 @@ export class VehicleformComponent implements OnInit {
     'typeId': {
       'required': 'Bodystyle is required.'
     },
+    'purchaseDate': {
+      'required': 'Purchase Date is required.'
+    },
     'purchasePrice': {
       'required': 'Purchase Price is required.'
     },
@@ -122,9 +127,11 @@ export class VehicleformComponent implements OnInit {
   };
 
   onSubmit(formData: any) {
+    this.savevehicle = this.mapDateData(formData.value);
+
     switch (this.data.dbops) {
       case DBOperation.create:
-        this.savevehicle = formData.value;
+        // this.savevehicle = formData.value;
         this.savevehicle.contactId = this.data.contactId;
 
         // this._vehicleService.addVehicle('api/vehicle/addVehicle', formData).subscribe(
@@ -143,7 +150,7 @@ export class VehicleformComponent implements OnInit {
         );
         break;
       case DBOperation.update:
-        this.savevehicle = formData.value;
+        // this.savevehicle = formData.value;
         this._vehicleService.updateVehicle('api/vehicle/updateVehicle', this.data.vehicle.vehicleId, this.savevehicle).subscribe(
           data => {
             // Success
@@ -177,5 +184,10 @@ export class VehicleformComponent implements OnInit {
   }
   SetControlsState(isEnable: boolean) {
     isEnable ? this.vehicleFrm.enable() : this.vehicleFrm.disable();
+  }
+
+  mapDateData(vehicle: IVehicle): IVehicle {
+    vehicle.purchaseDate = new Date(vehicle.purchaseDate).toISOString();
+    return vehicle;
   }
 }

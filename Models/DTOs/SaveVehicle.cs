@@ -29,6 +29,10 @@ namespace angular7_aspcore.Models.DTOs {
             get;
             set;
         }
+        public DateTime purchaseDate {
+            get;
+            set;
+        }
         public decimal purchasePrice {
             get;
             set;

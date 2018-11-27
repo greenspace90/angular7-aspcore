@@ -51,6 +51,17 @@
   </div>
   <div>
     <mat-form-field appearance="outline">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a purchase date" formControlName="purchaseDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="formErrors.purchaseDate">
+        {{ formErrors.purchaseDate }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
       <mat-label>Purchase Price</mat-label>
       <input matInput placeholder="Purchase Price..." formControlName="purchasePrice">
       <mat-error *ngIf="formErrors.purchasePrice">
