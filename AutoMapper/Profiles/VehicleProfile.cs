@@ -10,6 +10,8 @@ namespace  angular7_aspcore.AutoMapper.Profiles
         {
             // DTOs -> Models
             CreateMap<DTO.Vehicle, Vehicle>();
+
+            CreateMap<Vehicle, DTO.VehicleDTO>();
         }
     }    
 }
