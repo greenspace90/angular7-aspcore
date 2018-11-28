@@ -27,14 +27,6 @@ const appRoutes: Routes = [
   { path: 'bodystyle', component: DeleteconfirmComponent, canActivate: [AuthGuard] }
 ];
 
-// https://stackoverflow.com/questions/46771315/angular-cannot-get
-// const appRoutes: Routes = [
-// { path: '', component: ContactlistComponent, children: [ 
-// { path: '', redirectTo: 'contact', pathMatch: 'full' },   
-// { path: 'contactform', component: ContactformComponent },
-// { path: 'vehiclelist', component: VehiclelistComponent },
-// { path: 'vehicleform', component: VehicleformComponent }]}];
-
 // export const Routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 export const Routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 

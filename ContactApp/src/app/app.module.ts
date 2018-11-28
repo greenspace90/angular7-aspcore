@@ -61,9 +61,7 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     { provide: DateAdapter, useClass: MomentUtcDateAdapter },
-    // { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent],
-  // entryComponents:[DeleteconfirmComponent]
 })
 export class AppModule { }
