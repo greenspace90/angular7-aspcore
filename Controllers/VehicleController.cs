@@ -23,15 +23,17 @@ namespace contact_app.Controllers
 
         [HttpGet]  
         [Route("getAllVehicles")]  
-        public IEnumerable < Vehicle > GetAll() {  
-                // fetch all vehicle records  
-                return _context.Vehicles.Include(v => v.bodystyle).ToList();  
+        public IEnumerable < DTO.VehicleDTO > GetAll() {  
+                // fetch all vehicle records
+                return _mapper.Map<List<DTO.VehicleDTO>>(_context.Vehicles.Include(v => v.bodystyle).ToList());  
+                // return _context.Vehicles.Include(v => v.bodystyle).ToList();  
             }
 
         [HttpGet("{id}")]  
         [Route("getVehiclesByContactId")]  
-        public IEnumerable < Vehicle > GetByContactId(long id) {  
-                return _context.Vehicles.Include(v => v.bodystyle).Where(t => t.contactId == id).ToList();  
+        public IEnumerable < DTO.VehicleDTO > GetByContactId(long id) {  
+            return _mapper.Map<List<DTO.VehicleDTO>>(_context.Vehicles.Include(v => v.bodystyle).Where(t => t.contactId == id).ToList());
+            // return _context.Vehicles.Include(v => v.bodystyle).Where(t => t.contactId == id).ToList();  
             }
 
         [HttpGet("{id}")]  
