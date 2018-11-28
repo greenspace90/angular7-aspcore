@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
 import { VehiclelistComponent } from '@components/vehiclelist';
 import { VehicleService, BodystyleService } from '@app/_services/';
@@ -21,6 +20,7 @@ export class VehicleformComponent implements OnInit {
   selectedOption: string;
   bodystyles = [];
   savevehicle: IVehicle;
+  viewVehicle: IVehicle;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -40,10 +40,11 @@ export class VehicleformComponent implements OnInit {
       contact: [''],
       typeId: [''],
       bodystyle: [''],
-      purchaseDate: ['', [Validators.required]],
-      purchasePrice: ['', [Validators.required]],
+      purchaseDate: ['', [purchaseDateValidator()]],
+      purchasePrice: ['', [purchasePriceValidator(this.data.vehicle.residualValue)]],
       ownershipPeriod: ['', [Validators.required]],
-      residualValue: ['', [Validators.required]]
+      residualValue: ['', [residualValueValidator(this.data.vehicle.purchasePrice)]],
+      currentValue: ['']
     });
 
     this._bodystyleService.getAllBodystyles('api/bodystyle/getAllBodystyles')
@@ -62,6 +63,9 @@ export class VehicleformComponent implements OnInit {
     }
     this.SetControlsState(this.data.dbops === DBOperation.delete ? false : true);
   }
+
+
+
   // form value change event
   onValueChanged(data?: any) {
     if (!this.vehicleFrm) { return; }
@@ -113,16 +117,19 @@ export class VehicleformComponent implements OnInit {
       'required': 'Bodystyle is required.'
     },
     'purchaseDate': {
-      'required': 'Purchase Date is required.'
+      'required': 'Purchase Date is required.',
+      'purchaseDateInFuture': 'Purchase Date cannot be a future date.'
     },
     'purchasePrice': {
-      'required': 'Purchase Price is required.'
+      'required': 'Purchase Price is required.',
+      'purchasePriceBelowResidualValue': 'Purchase Price must exceed Residual Value.'
     },
     'ownershipPeriod': {
       'required': 'Ownership Period is required.'
     },
     'residualValue': {
-      'required': 'Residual Value is required.'
+      'required': 'Residual Value is required.',
+      'residualValueExceedsPurchasePrice': 'Residual Value cannot exceed Purchase Price'
     }
   };
 
@@ -190,4 +197,47 @@ export class VehicleformComponent implements OnInit {
     vehicle.purchaseDate = new Date(vehicle.purchaseDate).toISOString();
     return vehicle;
   }
+
 }
+function purchasePriceValidator(residualValue: number): ValidatorFn {
+
+  return (control: AbstractControl): { [key: string]: boolean } | null => {
+
+    if (control.value !== undefined && (isNaN(control.value) || control.value < residualValue)) {
+      return { 'purchasePriceBelowResidualValue': true };
+    }
+
+    return null;
+
+  };
+
+}
+
+function residualValueValidator(purchasePrice: number): ValidatorFn {
+
+  return (control: AbstractControl): { [key: string]: boolean } | null => {
+
+    if (control.value !== undefined && (isNaN(control.value) || control.value > purchasePrice)) {
+      return { 'residualValueExceedsPurchasePrice': true };
+    }
+
+    return null;
+
+  };
+
+}
+
+function purchaseDateValidator(): ValidatorFn {
+
+  return (control: AbstractControl): { [key: string]: boolean } | null => {
+    let today = new Date();
+    if (control.value !== undefined && control.value > today) {
+      return { 'purchaseDateInFuture': true };
+    }
+
+    return null;
+
+  };
+
+}
+
