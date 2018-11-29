@@ -18,11 +18,8 @@ import {
   catchError  
 } from 'rxjs/operators';  
 import {  
-  ISaveVehicle 
-} from '../_models/savevehicle';  
-import {  
-  IVehicle 
-} from '../_models/vehicle'; 
+  IDataPoint, ISaveVehicle, IVehicle 
+} from '../_models'; 
  
 const httpOptions = {  
   headers: new HttpHeaders({  
@@ -40,7 +37,14 @@ export class VehicleService {
   getVehiclesByContactId(url: string, id: number): Observable < IVehicle[] > {
       const newurl = `${url}?id=${id}`;   
       return this.http.get < IVehicle[] > (newurl).pipe(catchError(this.handleError));  
-  }  
+  } 
+  
+  // get chart data    
+  getChartDataById(url: string, id: number): Observable < IDataPoint[] > {
+      const newurl = `${url}?id=${id}`;   
+      return this.http.get < IDataPoint[] > (newurl).pipe(catchError(this.handleError));  
+  } 
+  
   // insert new vehicle details    
   addVehicle(url: string, vehicle: ISaveVehicle): Observable < any > {  
       return this.http.post(url, JSON.stringify(vehicle), httpOptions).pipe(catchError(this.handleError));  
