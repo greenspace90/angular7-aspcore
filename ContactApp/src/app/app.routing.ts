@@ -13,11 +13,13 @@ import { VehiclelistComponent } from '@components/vehiclelist';
 import { VehicleformComponent } from '@components/vehicleform';
 import { BodystylesComponent } from '@components/bodystyles';
 import { DeleteconfirmComponent } from '@components/deleteconfirm';
+// import { DepreciationchartComponent } from '@components/depreciationchart';
 
 const appRoutes: Routes = [
   { path: '',  pathMatch: 'full' , component: ContactlistComponent },
   { path: 'contactform', component: ContactformComponent },
   { path: 'vehiclelist', component: VehiclelistComponent },
+  // { path: 'vehiclelist', component: DepreciationchartComponent },
   { path: 'vehiclelist/:id', component: VehiclelistComponent },
   { path: 'vehicleform', component: VehicleformComponent },
   { path: 'login', component: LoginComponent },

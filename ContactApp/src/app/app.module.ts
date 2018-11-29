@@ -16,10 +16,11 @@ import { LoginComponent } from './components/login';
 import { RegisterComponent } from './components/register';
 import { BodystylesComponent } from './components/bodystyles';
 import { DeleteconfirmComponent } from './components/deleteconfirm';
+import { DepreciationchartComponent } from './components/depreciationchart';
 import { AlertComponent } from './_components';
 import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material';
+import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatDialogModule } from '@angular/material';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 
@@ -35,7 +36,8 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     LoginComponent,
     RegisterComponent,
     BodystylesComponent,
-    DeleteconfirmComponent
+    DeleteconfirmComponent,
+    DepreciationchartComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     ReactiveFormsModule,
     MatDatepickerModule, // provides moment date adapter
     MatMomentDateModule,
+    MatDialogModule,
     LayoutModule,
     Routing
   ],
