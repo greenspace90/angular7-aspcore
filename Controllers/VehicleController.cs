@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using angular7_aspcore.Models;
+using angular7_aspcore.Services;
 using DTO = angular7_aspcore.Models.DTOs;
 using AutoMapper;
 
@@ -13,12 +15,15 @@ namespace contact_app.Controllers
     [Route("api/[controller]")]  
     public class VehicleController: ControllerBase {  
         private readonly ContactAppContext _context;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
+
+        private IVehicleService _vehicleService; 
   
         // initiate database context  
-        public VehicleController(ContactAppContext context, IMapper mapper) {  
+        public VehicleController(IVehicleService vehicleService, ContactAppContext context, IMapper mapper) {  
                 _context = context; 
-                _mapper = mapper;  
+                _mapper = mapper;
+                _vehicleService = vehicleService;
             }
 
         [HttpGet]  
@@ -46,6 +51,16 @@ namespace contact_app.Controllers
                 }  
                 return new ObjectResult(item);  
             }
+
+        [HttpGet("{id}")]  
+        [Route("getChartData")]  
+        public IEnumerable <DTO.Datapoint> GetChartDataById(long id) {  
+
+                var data = _vehicleService.GetChartDataById(id);
+                  
+                return data;  
+            }
+
 
         [HttpPost]  
         [Route("addVehicle")]  
