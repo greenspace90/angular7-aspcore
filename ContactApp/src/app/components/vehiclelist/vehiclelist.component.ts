@@ -177,7 +177,8 @@ async function openChartDialog(chartData, dialog, chartTitle) {
         height: '600px',
         width: '1550px',
         // data: chartData
-        data: {chartData: chartData, chartTitle: chartTitle}
+        data: {chartData: chartData, chartTitle: chartTitle},
+        panelClass: 'custom-settings'
       });
 
       dialogRef.afterClosed().subscribe(result => {

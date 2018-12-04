@@ -25,14 +25,36 @@ export class DepreciationchartComponent implements AfterViewInit {
 
     this.canvas = document.getElementById('depreciationChart');
     this.ctx = this.canvas.getContext('2d');
-    let depreciationChart = new Chart(this.ctx, {
+
+    Chart.pluginService.register({
+      beforeDraw: function (chart: any, easing) {
+        if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
+          var ctx = chart.chart.ctx;
+          var chartArea = chart.chartArea;
+
+          ctx.save();
+          ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+          ctx.fillRect(chartArea.left, chartArea.top, chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
+          ctx.restore();
+        }
+      }
+    });
+
+
+
+    // let depreciationChart = new Chart(this.ctx, {
+    var config = {
       type: 'line',
       data: {
         labels: this.days,
         datasets: [
           {
             data: this.bookValue,
-            borderColor: '#3cba9f',
+            backgroundColor: '#ff0000',
+            borderColor: '#ff0000',
+            pointRadius: 0.5,
+            pointBorderWidth: 0.5,
+            // borderWidth: 0.05,
             fill: false
           }
         ]
@@ -62,25 +84,24 @@ export class DepreciationchartComponent implements AfterViewInit {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Value (£)',
+              labelString: 'Value',
               fontSize: 14
             },
             ticks: {
-              beginAtZero: true,
-              stepSize: 2500,
-
-              // Return an empty string to draw the tick line but hide the tick label
-              // Return `null` or `undefined` to hide the tick line entirely
-                // Convert the number to a string and split the string every 3 charaters from the end
-              userCallback: function (value, index, values) {
+              // stepSize: 2500,
+              callback: function (value, index, values) {
                 value = value.toString();
+                // Split every 3 digits
                 value = value.split(/(?=(?:...)*$)/);
                 // Convert the array to a string and format the output
-                value = value.join('.');
+                value = value.join(',');
                 return '£' + value;
               }
             }
           }]
+        },
+        chartArea: {
+          backgroundColor: '#99ebff'
         },
         title: {
           display: true,
@@ -89,11 +110,23 @@ export class DepreciationchartComponent implements AfterViewInit {
         },
         aspectRatio: 3
       }
-    })
+    }
+    // })
+
+    let depreciationChart = new Chart(this.ctx, config);
+
+
     // console.log(depreciationChart);
+
+
+
+
   }
 
 
 
 
+
 }
+
+
