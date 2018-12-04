@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using angular7_aspcore.Models;
+using DTO = angular7_aspcore.Models.DTOs;
+using AutoMapper;
 
 namespace contact_app.Controllers
 {
@@ -11,17 +13,20 @@ namespace contact_app.Controllers
     [Produces("application/json")]  
     [Route("api/[controller]")]  
     public class BodystyleController: ControllerBase {  
+        // initiate database context 
         private readonly ContactAppContext _context;  
-        // initiate database context  
-        public BodystyleController(ContactAppContext context) {  
-                _context = context;  
+        private readonly IMapper _mapper; 
+ 
+        public BodystyleController(ContactAppContext context, IMapper mapper) {  
+                _context = context;
+                _mapper = mapper;  
             }
 
         [HttpGet]  
         [Route("getAllBodystyles")]  
-        public IEnumerable < Bodystyle > GetAll() {  
+        public IEnumerable < DTO.Bodystyle > GetAll() {  
                 // fetch all bodystyle records  
-                return _context.Bodystyles.ToList();  
+                return _mapper.Map<IEnumerable<DTO.Bodystyle>>(_context.Bodystyles.OrderBy(n => n.name).ToList()); 
             }
 
         [HttpGet("{id}")]  

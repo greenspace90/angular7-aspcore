@@ -1,0 +1,16 @@
+<form [formGroup]="deleteconfirmFrm">
+  <h2>{{data.modalTitle}}</h2>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input [readonly]= true matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button type="button" mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
+    <button type="button" mat-raised-button color="primary"(click)="delete()">{{data.modalBtnTitle}}</button>
+  </div>
+
+</form>

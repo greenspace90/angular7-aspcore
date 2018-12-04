@@ -91,7 +91,7 @@ namespace contact_app.Controllers
                 contact.gender = item.gender;  
                 contact.birth = item.birth;  
                 contact.techno = item.techno;  
-                contact.message = item.message;  
+                contact.role = item.role;  
                 _context.Contacts.Update(contact);  
                 _context.SaveChanges();  
                 return Ok(new {  

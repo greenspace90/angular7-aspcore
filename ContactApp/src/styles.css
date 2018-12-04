@@ -11,3 +11,12 @@ table {
     padding: 0 13px !important;
     margin: 5px !important;
 }
+
+.centre {
+    text-align: center;
+}
+
+.form-left {
+    position: absolute;
+    left:20px;
+}

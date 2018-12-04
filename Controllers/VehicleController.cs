@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using angular7_aspcore.Models;
+using angular7_aspcore.Services;
 using DTO = angular7_aspcore.Models.DTOs;
 using AutoMapper;
 
@@ -13,25 +15,30 @@ namespace contact_app.Controllers
     [Route("api/[controller]")]  
     public class VehicleController: ControllerBase {  
         private readonly ContactAppContext _context;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
+
+        private IVehicleService _vehicleService; 
   
         // initiate database context  
-        public VehicleController(ContactAppContext context, IMapper mapper) {  
+        public VehicleController(IVehicleService vehicleService, ContactAppContext context, IMapper mapper) {  
                 _context = context; 
-                _mapper = mapper;  
+                _mapper = mapper;
+                _vehicleService = vehicleService;
             }
 
         [HttpGet]  
         [Route("getAllVehicles")]  
-        public IEnumerable < Vehicle > GetAll() {  
-                // fetch all vehicle records  
-                return _context.Vehicles.Include(v => v.bodystyle).ToList();  
+        public IEnumerable < DTO.VehicleDTO > GetAll() {  
+                // fetch all vehicle records
+                return _mapper.Map<List<DTO.VehicleDTO>>(_context.Vehicles.Include(v => v.bodystyle).ToList());  
+                // return _context.Vehicles.Include(v => v.bodystyle).ToList();  
             }
 
         [HttpGet("{id}")]  
         [Route("getVehiclesByContactId")]  
-        public IEnumerable < Vehicle > GetByContactId(long id) {  
-                return _context.Vehicles.Include(v => v.bodystyle).Where(t => t.contactId == id).ToList();  
+        public IEnumerable < DTO.VehicleDTO > GetByContactId(long id) {  
+            return _mapper.Map<List<DTO.VehicleDTO>>(_context.Vehicles.Include(v => v.bodystyle).Where(t => t.contactId == id).ToList());
+            // return _context.Vehicles.Include(v => v.bodystyle).Where(t => t.contactId == id).ToList();  
             }
 
         [HttpGet("{id}")]  
@@ -45,21 +52,24 @@ namespace contact_app.Controllers
                 return new ObjectResult(item);  
             }
 
+        [HttpGet("{id}")]  
+        [Route("getChartData")]  
+        public IEnumerable <DTO.Datapoint> GetChartDataById(long id) {  
+
+                var data = _vehicleService.GetChartDataById(id);
+                  
+                return data;  
+            }
+
+
         [HttpPost]  
         [Route("addVehicle")]  
-        public IActionResult Create([FromBody] Vehicle item) {  
+        public IActionResult Create([FromBody] DTO.Vehicle item) {  
                 // set bad request if vehicle data is not provided in body  
                 if (item == null) {  
                     return BadRequest();  
-                }  
-                _context.Vehicles.Add(new Vehicle {  
-                    make = item.make,
-                    model = item.model,
-                    version = item.version,
-                    registration = item.registration,
-                    contactId = item.contactId,
-                    typeId = item.typeId
-                });  
+                }
+                _context.Vehicles.Add(_mapper.Map<Vehicle>(item));  
                 _context.SaveChanges();  
                 return Ok(new {  
                     message = "Vehicle is added successfully."  
@@ -68,7 +78,7 @@ namespace contact_app.Controllers
 
         [HttpPut("{id}")]  
         [Route("updateVehicle")]  
-        public IActionResult Update(long id, [FromBody] DTO.SaveVehicle item) {  
+        public IActionResult Update(long id, [FromBody] DTO.Vehicle item) {  
                 // set bad request if vehicle data is not provided in body  
                 if (item == null || id == 0) {  
                     return BadRequest();  
@@ -78,12 +88,6 @@ namespace contact_app.Controllers
                     return NotFound();  
                 }
                 _mapper.Map(item, vehicle);
-                // vehicle.make = item.make;
-                // vehicle.model = item.model;
-                // vehicle.version = item.version;
-                // vehicle.registration = item.registration;
-                // vehicle.contactId = item.contactId;
-                // vehicle.typeId = item.typeId;  
                 _context.Vehicles.Update(vehicle);  
                 _context.SaveChanges();  
                 return Ok(new {  

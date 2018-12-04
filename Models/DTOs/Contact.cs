@@ -28,7 +28,7 @@ namespace angular7_aspcore.Models.DTOs
             get;  
             set;  
         }  
-        public string message {  
+        public string role {  
             get;  
             set;  
         }  
