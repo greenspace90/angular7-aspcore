@@ -66,5 +66,8 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     { provide: DateAdapter, useClass: MomentUtcDateAdapter },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [
+    DepreciationchartComponent
+  ],
 })
 export class AppModule { }
