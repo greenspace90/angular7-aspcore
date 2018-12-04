@@ -16,9 +16,13 @@ import { LoginComponent } from './components/login';
 import { RegisterComponent } from './components/register';
 import { BodystylesComponent } from './components/bodystyles';
 import { DeleteconfirmComponent } from './components/deleteconfirm';
+import { DepreciationchartComponent } from './components/depreciationchart';
 import { AlertComponent } from './_components';
 import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatDialogModule } from '@angular/material';
+import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     LoginComponent,
     RegisterComponent,
     BodystylesComponent,
-    DeleteconfirmComponent
+    DeleteconfirmComponent,
+    DepreciationchartComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDatepickerModule, // provides moment date adapter
+    MatMomentDateModule,
+    MatDialogModule,
     LayoutModule,
     Routing
   ],
@@ -52,9 +60,14 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     UserService,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MomentUtcDateAdapter },
   ],
   bootstrap: [AppComponent],
-  // entryComponents:[DeleteconfirmComponent]
+  entryComponents: [
+    DepreciationchartComponent
+  ],
 })
 export class AppModule { }

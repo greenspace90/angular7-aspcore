@@ -16,6 +16,9 @@ namespace angular7_aspcore.AutoMapper.Profiles {
             .ForMember(dest => dest.disableDelete, opt => opt.Ignore());
             CreateMap<Model.Bodystyle, DTO.Bodystyle> ()
             .ForMember (dest => dest.disableDelete, opt => opt.ResolveUsing<CustomResolver>());
+            CreateMap<Model.Type, Model.Type> ()
+            .Include<Model.Bodystyle, Model.Bodystyle>();
+            CreateMap<Model.Bodystyle, Model.Bodystyle> ();
         }
     }
 }

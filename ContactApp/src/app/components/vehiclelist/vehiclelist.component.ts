@@ -2,8 +2,9 @@ import 'rxjs/add/operator/map'
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSnackBar, MatSort, MatDialog } from '@angular/material';
 import { VehicleformComponent } from '@components/vehicleform';
+import { DepreciationchartComponent } from '@components/depreciationchart';
 import { VehicleService } from '@app/_services';
-import { IVehicle } from '@app/_models';
+import { IVehicle, IDataPoint } from '@app/_models';
 import { DBOperation } from '@app/shared/DBOperation';
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,14 +17,17 @@ export class VehiclelistComponent implements OnInit {
 
   vehicles: IVehicle[];
   vehicle: IVehicle;
+  // vehicleId: number;
   loadingState: boolean;
   dbops: DBOperation;
   modalTitle: string;
   modalBtnTitle: string;
   contactId: number;
+  // chartTitle: string;
+  // chartData: IDataPoint[];
 
   // set columns that will need to show in listing table
-  displayedColumns = ['make', 'model', 'version', 'registration', 'bodystyle', 'action'];
+  displayedColumns = ['make', 'model', 'version', 'registration', 'bodystyle', 'purchaseDate', 'purchasePrice', 'ownershipPeriod', 'currentValue', 'residualValue', 'action'];
   // setting up datasource for material table
   dataSource = new MatTableDataSource<IVehicle>();
 
@@ -36,14 +40,14 @@ export class VehiclelistComponent implements OnInit {
       this.contactId = id;
       // let id = contactId;
 
-    this.loadingState = true;
-    if (this.contactId) {
-      this.loadVehicles(this.contactId);
-    }
-    else {
-      this.loadAllVehicles();
-    }
-    this.dataSource.sort = this.sort;
+      this.loadingState = true;
+      if (this.contactId) {
+        this.loadVehicles(this.contactId);
+      }
+      else {
+        this.loadAllVehicles();
+      }
+      this.dataSource.sort = this.sort;
     });
   };
 
@@ -66,8 +70,7 @@ export class VehiclelistComponent implements OnInit {
   openDialog(id: number): void {
     let vehicledata;
     // Undefined when adding new Vehicle
-    if(this.vehicle !== undefined)
-    {
+    if (this.vehicle !== undefined) {
       this.vehicle.contactId = id;
       vehicledata = this.vehicle;
     }
@@ -120,10 +123,80 @@ export class VehiclelistComponent implements OnInit {
     this.vehicle = this.dataSource.data.filter(x => x.vehicleId === id)[0];
     this.openDialog(this.vehicle.contactId);
   }
+
+  displayChart(id: number) {
+    this.vehicle = this.dataSource.data.filter(x => x.vehicleId === id)[0];    // Info needed for chart title
+    let chartTitle = `Depreciation curve for ${this.vehicle.make} ${this.vehicle.model} over ${this.vehicle.ownershipPeriod} years`;
+
+    callChart(id, this._vehicleService, this.dialog, chartTitle);
+  };
+
   showMessage(msg: string) {
     this.snackBar.open(msg, '', {
       duration: 3000
     });
-  }
-
+  };
 }
+
+function callChart(id: number, _vehicleService: VehicleService, dialog: MatDialog, chartTitle: string) {
+  (async () => {
+    await callChartFunctions(id, _vehicleService, dialog, chartTitle);
+  })();
+}
+
+async function callChartFunctions(id: number, _vehicleService: VehicleService, dialog: MatDialog, chartTitle: string) {
+  try {
+    let chartData = await getChartData(id, _vehicleService);
+    let message = await openChartDialog(chartData, dialog, chartTitle);
+    console.log(message);
+  }
+  catch (error) {
+    console.log(error.message);
+  }
+}
+
+const getChartData = (id, _vehicleService) => {
+  return new Promise((resolve, reject) => {
+    _vehicleService.getChartDataById('api/vehicle/getChartData', id)
+      .subscribe(data => {
+        const chartData: IDataPoint[] = data;
+        // loadingState = false;
+        if (chartData) {
+          resolve(chartData);
+        } else {
+          reject();
+        }
+      });
+  });
+};
+
+async function openChartDialog(chartData, dialog, chartTitle) {
+  return new Promise(
+    (resolve, reject) => {
+      const dialogRef = dialog.open(DepreciationchartComponent, {
+        height: '600px',
+        width: '1550px',
+        // data: chartData
+        data: {chartData: chartData, chartTitle: chartTitle}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if (result === 'success') {
+          // this.loadingState = true;
+          // this.loadVehicles(id);
+        }
+        else {
+          // this.showMessage('Please try again, something went wrong');
+        }
+      });
+
+      var message = 'OK';
+
+      resolve(message);
+    }
+  );
+};
+
+
+

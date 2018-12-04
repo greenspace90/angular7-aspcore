@@ -5,4 +5,7 @@ export interface ISaveVehicle {
     registration: string;
     contactId: number;
     typeId: number;
+    purchasePrice: number;
+    ownershipPeriod: number;
+    residualValue: number;
 }

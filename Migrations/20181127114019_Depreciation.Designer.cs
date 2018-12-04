@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using angular7_aspcore.Models;
 
 namespace angular7_aspcore.Migrations
 {
     [DbContext(typeof(ContactAppContext))]
-    partial class ContactAppContextModelSnapshot : ModelSnapshot
+    [Migration("20181127114019_Depreciation")]
+    partial class Depreciation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,8 +103,6 @@ namespace angular7_aspcore.Migrations
 
                     b.Property<long>("ownershipPeriod");
 
-                    b.Property<DateTime>("purchaseDate");
-
                     b.Property<decimal>("purchasePrice");
 
                     b.Property<string>("registration");
@@ -122,12 +122,12 @@ namespace angular7_aspcore.Migrations
                     b.ToTable("Vehicles");
 
                     b.HasData(
-                        new { vehicleId = 1L, contactId = 1L, make = "Ford", model = "Focus", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "FG53BDA", residualValue = 0m, typeId = 2L, version = "1.0 EcoBoost" },
-                        new { vehicleId = 2L, contactId = 2L, make = "Fiat", model = "500", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "FG18BDE", residualValue = 0m, typeId = 2L, version = "Abarth" },
-                        new { vehicleId = 3L, contactId = 3L, make = "Mercedes-Benz", model = "C-Class", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "VG68BDA", residualValue = 0m, typeId = 1L, version = "180" },
-                        new { vehicleId = 4L, contactId = 3L, make = "BMW", model = "X5", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "NH68LKU", residualValue = 0m, typeId = 3L, version = "5.0 M" },
-                        new { vehicleId = 5L, contactId = 2L, make = "Porsche", model = "Boxster", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "LP67AWE", residualValue = 0m, typeId = 4L, version = "S" },
-                        new { vehicleId = 6L, contactId = 2L, make = "Mercedes-Benz", model = "SL", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "MB66DSA", residualValue = 0m, typeId = 5L, version = "500" }
+                        new { vehicleId = 1L, contactId = 1L, make = "Ford", model = "Focus", ownershipPeriod = 0L, purchasePrice = 0m, registration = "FG53BDA", residualValue = 0m, typeId = 2L, version = "1.0 EcoBoost" },
+                        new { vehicleId = 2L, contactId = 2L, make = "Fiat", model = "500", ownershipPeriod = 0L, purchasePrice = 0m, registration = "FG18BDE", residualValue = 0m, typeId = 2L, version = "Abarth" },
+                        new { vehicleId = 3L, contactId = 3L, make = "Mercedes-Benz", model = "C-Class", ownershipPeriod = 0L, purchasePrice = 0m, registration = "VG68BDA", residualValue = 0m, typeId = 1L, version = "180" },
+                        new { vehicleId = 4L, contactId = 3L, make = "BMW", model = "X5", ownershipPeriod = 0L, purchasePrice = 0m, registration = "NH68LKU", residualValue = 0m, typeId = 3L, version = "5.0 M" },
+                        new { vehicleId = 5L, contactId = 2L, make = "Porsche", model = "Boxster", ownershipPeriod = 0L, purchasePrice = 0m, registration = "LP67AWE", residualValue = 0m, typeId = 4L, version = "S" },
+                        new { vehicleId = 6L, contactId = 2L, make = "Mercedes-Benz", model = "SL", ownershipPeriod = 0L, purchasePrice = 0m, registration = "MB66DSA", residualValue = 0m, typeId = 5L, version = "500" }
                     );
                 });
 
