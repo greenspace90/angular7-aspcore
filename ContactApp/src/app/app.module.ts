@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppMaterialModule } from './modules/app.material.module';
+import {MatTableModule} from '@angular/material/table';
+import { MatColorPickerModule } from 'mat-color-picker';
 import { ContactformComponent } from './components/contactform';
 import { ContactlistComponent } from './components/contactlist';
 import { VehiclelistComponent } from './components/vehiclelist';
@@ -20,7 +22,7 @@ import { DepreciationchartComponent } from './components/depreciationchart';
 import { AlertComponent } from './_components';
 import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatDialogModule } from '@angular/material';
+import { MatDatepickerModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatDialogModule } from '@angular/material';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 
@@ -49,6 +51,8 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     MatDatepickerModule, // provides moment date adapter
     MatMomentDateModule,
     MatDialogModule,
+    MatTableModule,
+    MatColorPickerModule,
     LayoutModule,
     Routing
   ],
