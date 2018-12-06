@@ -48,6 +48,33 @@ namespace angular7_aspcore.Migrations
                     );
                 });
 
+            modelBuilder.Entity("angular7_aspcore.Models.Settings", b =>
+                {
+                    b.Property<long?>("settingsId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("chartAreaBackgroundColour");
+
+                    b.Property<string>("chartLineColour");
+
+                    b.Property<double?>("chartLineWidth");
+
+                    b.Property<string>("chartModalBackgroundColour");
+
+                    b.Property<long?>("chartScaleLabelFontSize");
+
+                    b.Property<long?>("chartTitleFontSize");
+
+                    b.HasKey("settingsId");
+
+                    b.ToTable("Settings");
+
+                    b.HasData(
+                        new { settingsId = 1L, chartAreaBackgroundColour = "#99ebff", chartLineColour = "#ff0000", chartLineWidth = 0.5, chartModalBackgroundColour = "rgb(169, 247, 208)", chartScaleLabelFontSize = 14L, chartTitleFontSize = 18L }
+                    );
+                });
+
             modelBuilder.Entity("angular7_aspcore.Models.Type", b =>
                 {
                     b.Property<long?>("typeId")

@@ -27,6 +27,24 @@ namespace angular7_aspcore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Settings",
+                columns: table => new
+                {
+                    settingsId = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    chartTitleFontSize = table.Column<long>(nullable: true),
+                    chartScaleLabelFontSize = table.Column<long>(nullable: true),
+                    chartLineWidth = table.Column<double>(nullable: true),
+                    chartLineColour = table.Column<string>(nullable: true),
+                    chartAreaBackgroundColour = table.Column<string>(nullable: true),
+                    chartModalBackgroundColour = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Settings", x => x.settingsId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Types",
                 columns: table => new
                 {
@@ -41,6 +59,23 @@ namespace angular7_aspcore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Vehicles",
                 columns: table => new
                 {
@@ -51,7 +86,11 @@ namespace angular7_aspcore.Migrations
                     version = table.Column<string>(nullable: true),
                     registration = table.Column<string>(nullable: true),
                     contactId = table.Column<long>(nullable: true),
-                    typeId = table.Column<long>(nullable: true)
+                    typeId = table.Column<long>(nullable: true),
+                    purchaseDate = table.Column<DateTime>(nullable: false),
+                    purchasePrice = table.Column<decimal>(nullable: false),
+                    ownershipPeriod = table.Column<long>(nullable: false),
+                    residualValue = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,6 +120,11 @@ namespace angular7_aspcore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Settings",
+                columns: new[] { "settingsId", "chartAreaBackgroundColour", "chartLineColour", "chartLineWidth", "chartModalBackgroundColour", "chartScaleLabelFontSize", "chartTitleFontSize" },
+                values: new object[] { 1L, "#99ebff", "#ff0000", 0.5, "rgb(169, 247, 208)", 14L, 18L });
+
+            migrationBuilder.InsertData(
                 table: "Types",
                 columns: new[] { "typeId", "Discriminator", "name" },
                 values: new object[,]
@@ -94,15 +138,15 @@ namespace angular7_aspcore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "vehicleId", "contactId", "make", "model", "registration", "typeId", "version" },
+                columns: new[] { "vehicleId", "contactId", "make", "model", "ownershipPeriod", "purchaseDate", "purchasePrice", "registration", "residualValue", "typeId", "version" },
                 values: new object[,]
                 {
-                    { 1L, 1L, "Ford", "Focus", "FG53BDA", 2L, "1.0 EcoBoost" },
-                    { 2L, 2L, "Fiat", "500", "FG18BDE", 2L, "Abarth" },
-                    { 5L, 2L, "Porsche", "Boxster", "LP67AWE", 4L, "S" },
-                    { 6L, 2L, "Mercedes-Benz", "SL", "MB66DSA", 5L, "500" },
-                    { 3L, 3L, "Mercedes-Benz", "C-Class", "VG68BDA", 1L, "180" },
-                    { 4L, 3L, "BMW", "X5", "NH68LKU", 3L, "5.0 M" }
+                    { 1L, 1L, "Ford", "Focus", 0L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "FG53BDA", 0m, 2L, "1.0 EcoBoost" },
+                    { 2L, 2L, "Fiat", "500", 0L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "FG18BDE", 0m, 2L, "Abarth" },
+                    { 5L, 2L, "Porsche", "Boxster", 0L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "LP67AWE", 0m, 4L, "S" },
+                    { 6L, 2L, "Mercedes-Benz", "SL", 0L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "MB66DSA", 0m, 5L, "500" },
+                    { 3L, 3L, "Mercedes-Benz", "C-Class", 0L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "VG68BDA", 0m, 1L, "180" },
+                    { 4L, 3L, "BMW", "X5", 0L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "NH68LKU", 0m, 3L, "5.0 M" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -118,6 +162,12 @@ namespace angular7_aspcore.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Settings");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
             migrationBuilder.DropTable(
                 name: "Vehicles");
 

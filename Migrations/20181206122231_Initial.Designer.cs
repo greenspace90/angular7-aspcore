@@ -10,8 +10,8 @@ using angular7_aspcore.Models;
 namespace angular7_aspcore.Migrations
 {
     [DbContext(typeof(ContactAppContext))]
-    [Migration("20181114145755_User")]
-    partial class User
+    [Migration("20181206122231_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,33 @@ namespace angular7_aspcore.Migrations
                         new { contactId = 1L, birth = new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "ar.b@isp.com", gender = (byte)0, role = "Developer", techno = "Typescript" },
                         new { contactId = 2L, birth = new DateTime(1988, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "al.l@mail.com", gender = (byte)1, role = "Front end", techno = "Angular" },
                         new { contactId = 3L, birth = new DateTime(1975, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "example@mail.net", gender = (byte)0, role = "Lead developer", techno = "C#" }
+                    );
+                });
+
+            modelBuilder.Entity("angular7_aspcore.Models.Settings", b =>
+                {
+                    b.Property<long?>("settingsId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("chartAreaBackgroundColour");
+
+                    b.Property<string>("chartLineColour");
+
+                    b.Property<double?>("chartLineWidth");
+
+                    b.Property<string>("chartModalBackgroundColour");
+
+                    b.Property<long?>("chartScaleLabelFontSize");
+
+                    b.Property<long?>("chartTitleFontSize");
+
+                    b.HasKey("settingsId");
+
+                    b.ToTable("Settings");
+
+                    b.HasData(
+                        new { settingsId = 1L, chartAreaBackgroundColour = "#99ebff", chartLineColour = "#ff0000", chartLineWidth = 0.5, chartModalBackgroundColour = "rgb(169, 247, 208)", chartScaleLabelFontSize = 14L, chartTitleFontSize = 18L }
                     );
                 });
 
@@ -101,7 +128,15 @@ namespace angular7_aspcore.Migrations
 
                     b.Property<string>("model");
 
+                    b.Property<long>("ownershipPeriod");
+
+                    b.Property<DateTime>("purchaseDate");
+
+                    b.Property<decimal>("purchasePrice");
+
                     b.Property<string>("registration");
+
+                    b.Property<decimal>("residualValue");
 
                     b.Property<long?>("typeId");
 
@@ -116,12 +151,12 @@ namespace angular7_aspcore.Migrations
                     b.ToTable("Vehicles");
 
                     b.HasData(
-                        new { vehicleId = 1L, contactId = 1L, make = "Ford", model = "Focus", registration = "FG53BDA", typeId = 2L, version = "1.0 EcoBoost" },
-                        new { vehicleId = 2L, contactId = 2L, make = "Fiat", model = "500", registration = "FG18BDE", typeId = 2L, version = "Abarth" },
-                        new { vehicleId = 3L, contactId = 3L, make = "Mercedes-Benz", model = "C-Class", registration = "VG68BDA", typeId = 1L, version = "180" },
-                        new { vehicleId = 4L, contactId = 3L, make = "BMW", model = "X5", registration = "NH68LKU", typeId = 3L, version = "5.0 M" },
-                        new { vehicleId = 5L, contactId = 2L, make = "Porsche", model = "Boxster", registration = "LP67AWE", typeId = 4L, version = "S" },
-                        new { vehicleId = 6L, contactId = 2L, make = "Mercedes-Benz", model = "SL", registration = "MB66DSA", typeId = 5L, version = "500" }
+                        new { vehicleId = 1L, contactId = 1L, make = "Ford", model = "Focus", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "FG53BDA", residualValue = 0m, typeId = 2L, version = "1.0 EcoBoost" },
+                        new { vehicleId = 2L, contactId = 2L, make = "Fiat", model = "500", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "FG18BDE", residualValue = 0m, typeId = 2L, version = "Abarth" },
+                        new { vehicleId = 3L, contactId = 3L, make = "Mercedes-Benz", model = "C-Class", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "VG68BDA", residualValue = 0m, typeId = 1L, version = "180" },
+                        new { vehicleId = 4L, contactId = 3L, make = "BMW", model = "X5", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "NH68LKU", residualValue = 0m, typeId = 3L, version = "5.0 M" },
+                        new { vehicleId = 5L, contactId = 2L, make = "Porsche", model = "Boxster", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "LP67AWE", residualValue = 0m, typeId = 4L, version = "S" },
+                        new { vehicleId = 6L, contactId = 2L, make = "Mercedes-Benz", model = "SL", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "MB66DSA", residualValue = 0m, typeId = 5L, version = "500" }
                     );
                 });
 
