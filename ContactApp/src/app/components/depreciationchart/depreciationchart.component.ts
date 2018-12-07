@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import { Component, Inject, AfterViewInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { VehiclelistComponent } from '@components/vehiclelist';
-import { IDataPoint } from '@app/_models';
+import { SettingsService } from '@app/_services';
+import { ISettings } from '@app/_models';
 
 @Component({
   selector: 'app-depreciationchart',
@@ -15,8 +16,9 @@ export class DepreciationchartComponent implements AfterViewInit {
   ctx: any;
   days: string[];
   bookValue: number[];
+  settings: ISettings;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _settingsService: SettingsService,
     public dialogRef: MatDialogRef<VehiclelistComponent>) { }
 
   ngAfterViewInit() {
@@ -40,80 +42,155 @@ export class DepreciationchartComponent implements AfterViewInit {
       }
     });
 
+    this._settingsService.getSettings('api/settings/getSettings')
+    .subscribe(settings => {
+      this.settings = settings;
+      document.documentElement.style.setProperty('--background-color', settings.chartModalBackgroundColour);
+      var config = {
+        type: 'line',
+        data: {
+          labels: this.days,
+          datasets: [
+            {
+              data: this.bookValue,
+              backgroundColor: this.settings.chartLineColour,
+              borderColor: this.settings.chartLineColour,
+              pointRadius: this.settings.chartLineWidth,
+              pointBorderWidth: this.settings.chartLineWidth,
+              // borderWidth: 0.05,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          layout: {
+            padding: {
+              left: 50,
+              right: 0,
+              top: 0,
+              bottom: 0
+            }
+          },
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Days',
+                fontSize: this.settings.chartScaleLabelFontSize
+              }
+            }],
+            yAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Value',
+                fontSize: this.settings.chartScaleLabelFontSize
+              },
+              ticks: {
+                // stepSize: 2500,
+                callback: function (value, index, values) {
+                  value = value.toString();
+                  // Split every 3 digits
+                  value = value.split(/(?=(?:...)*$)/);
+                  // Convert the array to a string and format the output
+                  value = value.join(',');
+                  return '£' + value;
+                }
+              }
+            }]
+          },
+          chartArea: {
+            backgroundColor: this.settings.chartAreaBackgroundColour
+          },
+          title: {
+            display: true,
+            text: this.data.chartTitle,
+            fontSize: this.settings.chartTitleFontSize
+          },
+          aspectRatio: 3
+        }
+      }
+      let depreciationChart = new Chart(this.ctx, config);
 
+  
+    });
 
     // let depreciationChart = new Chart(this.ctx, {
-    var config = {
-      type: 'line',
-      data: {
-        labels: this.days,
-        datasets: [
-          {
-            data: this.bookValue,
-            backgroundColor: '#ff0000',
-            borderColor: '#ff0000',
-            pointRadius: 0.5,
-            pointBorderWidth: 0.5,
-            // borderWidth: 0.05,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        layout: {
-          padding: {
-            left: 50,
-            right: 0,
-            top: 0,
-            bottom: 0
-          }
-        },
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Days',
-              fontSize: 14
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Value',
-              fontSize: 14
-            },
-            ticks: {
-              // stepSize: 2500,
-              callback: function (value, index, values) {
-                value = value.toString();
-                // Split every 3 digits
-                value = value.split(/(?=(?:...)*$)/);
-                // Convert the array to a string and format the output
-                value = value.join(',');
-                return '£' + value;
-              }
-            }
-          }]
-        },
-        chartArea: {
-          backgroundColor: '#99ebff'
-        },
-        title: {
-          display: true,
-          text: this.data.chartTitle,
-          fontSize: 18
-        },
-        aspectRatio: 3
-      }
-    }
+    // var config = {
+    //   type: 'line',
+    //   data: {
+    //     labels: this.days,
+    //     datasets: [
+    //       {
+    //         data: this.bookValue,
+    //         backgroundColor: this.settings.chartLineColour,
+    //         borderColor: this.settings.chartLineColour,
+    //         pointRadius: this.settings.chartLineWidth,
+    //         pointBorderWidth: this.settings.chartLineWidth,
+    //         // borderWidth: 0.05,
+    //         fill: false
+    //       }
+    //     ]
+    //   },
+    //   options: {
+    //     layout: {
+    //       padding: {
+    //         left: 50,
+    //         right: 0,
+    //         top: 0,
+    //         bottom: 0
+    //       }
+    //     },
+    //     legend: {
+    //       display: false
+    //     },
+    //     scales: {
+    //       xAxes: [{
+    //         display: true,
+    //         scaleLabel: {
+    //           display: true,
+    //           labelString: 'Days',
+    //           fontSize: this.settings.chartScaleLabelFontSize
+    //         }
+    //       }],
+    //       yAxes: [{
+    //         display: true,
+    //         scaleLabel: {
+    //           display: true,
+    //           labelString: 'Value',
+    //           fontSize: this.settings.chartScaleLabelFontSize
+    //         },
+    //         ticks: {
+    //           // stepSize: 2500,
+    //           callback: function (value, index, values) {
+    //             value = value.toString();
+    //             // Split every 3 digits
+    //             value = value.split(/(?=(?:...)*$)/);
+    //             // Convert the array to a string and format the output
+    //             value = value.join(',');
+    //             return '£' + value;
+    //           }
+    //         }
+    //       }]
+    //     },
+    //     chartArea: {
+    //       backgroundColor: this.settings.chartAreaBackgroundColour
+    //     },
+    //     title: {
+    //       display: true,
+    //       text: this.data.chartTitle,
+    //       fontSize: this.settings.chartTitleFontSize
+    //     },
+    //     aspectRatio: 3
+    //   }
+    // }
     // })
 
-    let depreciationChart = new Chart(this.ctx, config);
+    // let depreciationChart = new Chart(this.ctx, config);
 
 
     // console.log(depreciationChart);
