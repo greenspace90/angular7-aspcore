@@ -42,9 +42,9 @@ namespace angular7_aspcore.Migrations
                     b.ToTable("Contacts");
 
                     b.HasData(
-                        new { contactId = 1L, birth = new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "ar.b@isp.com", gender = (byte)0, role = "Developer", techno = "Typescript" },
-                        new { contactId = 2L, birth = new DateTime(1988, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "al.l@mail.com", gender = (byte)1, role = "Front end", techno = "Angular" },
-                        new { contactId = 3L, birth = new DateTime(1975, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "example@mail.net", gender = (byte)0, role = "Lead developer", techno = "C#" }
+                        new { contactId = 1L, birth = new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "ar.b@isp.com", gender = (byte)0, name = "Andrew", role = "Developer", techno = "Typescript" },
+                        new { contactId = 2L, birth = new DateTime(1988, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "al.l@mail.com", gender = (byte)1, name = "Alex", role = "Front end", techno = "Angular" },
+                        new { contactId = 3L, birth = new DateTime(1975, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), email = "example@mail.net", gender = (byte)0, name = "Rob", role = "Lead developer", techno = "C#" }
                     );
                 });
 
@@ -149,12 +149,12 @@ namespace angular7_aspcore.Migrations
                     b.ToTable("Vehicles");
 
                     b.HasData(
-                        new { vehicleId = 1L, contactId = 1L, make = "Ford", model = "Focus", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "FG53BDA", residualValue = 0m, typeId = 2L, version = "1.0 EcoBoost" },
-                        new { vehicleId = 2L, contactId = 2L, make = "Fiat", model = "500", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "FG18BDE", residualValue = 0m, typeId = 2L, version = "Abarth" },
-                        new { vehicleId = 3L, contactId = 3L, make = "Mercedes-Benz", model = "C-Class", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "VG68BDA", residualValue = 0m, typeId = 1L, version = "180" },
-                        new { vehicleId = 4L, contactId = 3L, make = "BMW", model = "X5", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "NH68LKU", residualValue = 0m, typeId = 3L, version = "5.0 M" },
-                        new { vehicleId = 5L, contactId = 2L, make = "Porsche", model = "Boxster", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "LP67AWE", residualValue = 0m, typeId = 4L, version = "S" },
-                        new { vehicleId = 6L, contactId = 2L, make = "Mercedes-Benz", model = "SL", ownershipPeriod = 0L, purchaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 0m, registration = "MB66DSA", residualValue = 0m, typeId = 5L, version = "500" }
+                        new { vehicleId = 1L, contactId = 1L, make = "Ford", model = "Focus", ownershipPeriod = 5L, purchaseDate = new DateTime(2015, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 20000m, registration = "FG15BDA", residualValue = 11000m, typeId = 2L, version = "1.0 EcoBoost" },
+                        new { vehicleId = 2L, contactId = 2L, make = "Fiat", model = "500", ownershipPeriod = 10L, purchaseDate = new DateTime(2014, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 15000m, registration = "FG14BDE", residualValue = 3000m, typeId = 2L, version = "Abarth" },
+                        new { vehicleId = 3L, contactId = 3L, make = "Mercedes-Benz", model = "C-Class", ownershipPeriod = 4L, purchaseDate = new DateTime(2017, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 28000m, registration = "VG67BDA", residualValue = 20000m, typeId = 1L, version = "180" },
+                        new { vehicleId = 4L, contactId = 3L, make = "BMW", model = "X5", ownershipPeriod = 6L, purchaseDate = new DateTime(2015, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 55000m, registration = "NH65LKU", residualValue = 25000m, typeId = 3L, version = "5.0 M" },
+                        new { vehicleId = 5L, contactId = 2L, make = "Porsche", model = "Boxster", ownershipPeriod = 7L, purchaseDate = new DateTime(2010, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 46000m, registration = "LP60AWE", residualValue = 27000m, typeId = 4L, version = "S" },
+                        new { vehicleId = 6L, contactId = 2L, make = "Mercedes-Benz", model = "SL", ownershipPeriod = 9L, purchaseDate = new DateTime(2012, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), purchasePrice = 68000m, registration = "MB62DSA", residualValue = 21000m, typeId = 5L, version = "500" }
                     );
                 });
 
