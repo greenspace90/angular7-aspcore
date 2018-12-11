@@ -14,6 +14,7 @@ import { VehicleformComponent } from '@components/vehicleform';
 import { BodystylesComponent } from '@components/bodystyles';
 import { DeleteconfirmComponent } from '@components/deleteconfirm';
 import { DepreciationchartComponent } from '@components/depreciationchart';
+import { SettingsComponent } from '@components/settings';
 
 const appRoutes: Routes = [
   { path: '',  pathMatch: 'full' , component: ContactlistComponent },
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
   { path: 'cms', component: CmsComponent, canActivate: [AuthGuard] },
   { path: 'bodystyle', component: BodystylesComponent, canActivate: [AuthGuard] },
   { path: 'bodystyle', component: DeleteconfirmComponent, canActivate: [AuthGuard] },
-  { path: 'settings', component: DepreciationchartComponent }
+  // { path: 'settings', component: DepreciationchartComponent },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }
 ];
 
 // export const Routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
