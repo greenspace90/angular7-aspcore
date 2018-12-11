@@ -1,0 +1,73 @@
+<form class="form-left" (ngSubmit)="onSubmit(settingsFrm)" [formGroup]="settingsFrm">
+  <h2 class="centre margin-bottom">{{title}}</h2>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Chart Line Colour</mat-label>
+      <input formControlName="chartLineColour" matInput [style.background]="settings.chartLineColour" [cpOKButton]="true"
+        [value]="settings.chartLineColour" [cpSaveClickOutside]="false" [cpOKButtonClass]="'btn btn-primary btn-xs'"
+        [(colorPicker)]="settings.chartLineColour" (colorPickerChange)="onChartLineColorChange($event)" />
+      <mat-error *ngIf="formErrors.chartLineColour">
+        {{ formErrors.chartLineColour }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Chart Area Background Colour</mat-label>
+      <input formControlName="chartAreaBackgroundColour" matInput [style.background]="settings.chartAreaBackgroundColour"
+        [cpOKButton]="true" [value]="settings.chartAreaBackgroundColour" [cpSaveClickOutside]="false" [cpOKButtonClass]="'btn btn-primary btn-xs'"
+        [(colorPicker)]="settings.chartAreaBackgroundColour" (colorPickerChange)="onChartAreaBackgroundColourChange($event)" />
+      <mat-error *ngIf="formErrors.chartAreaBackgroundColour">
+        {{ formErrors.chartAreaBackgroundColour }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Chart Modal Background Colour</mat-label>
+      <input formControlName="chartModalBackgroundColour" matInput [style.background]="settings.chartModalBackgroundColour"
+        [cpOKButton]="true" [value]="settings.chartModalBackgroundColour" [cpSaveClickOutside]="false"
+        [cpOKButtonClass]="'btn btn-primary btn-xs'" [(colorPicker)]="settings.chartModalBackgroundColour"
+        (colorPickerChange)="onChartModalBackgroundColourChange($event)" />
+      <mat-error *ngIf="formErrors.chartModalBackgroundColour">
+        {{ formErrors.chartModalBackgroundColour }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Chart Title Font Size</mat-label>
+      <input matInput placeholder="Chart Title Font Size..." formControlName="chartTitleFontSize">
+      <mat-error *ngIf="formErrors.chartTitleFontSize">
+        {{ formErrors.chartTitleFontSize }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="hidden">
+    <input formControlName="settingsId" 
+  </div> 
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Chart Scale Label Font Size</mat-label>
+      <input matInput placeholder="Chart Scale Label Font Size..." formControlName="chartScaleLabelFontSize">
+      <mat-error *ngIf="formErrors.chartScaleLabelFontSize">
+        {{ formErrors.chartScaleLabelFontSize }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Chart Line Width</mat-label>
+      <input matInput placeholder="Chart Line Width..." formControlName="chartLineWidth">
+      <mat-error *ngIf="formErrors.chartLineWidth">
+        {{ formErrors.chartLineWidth }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <button type="button" mat-raised-button color="warn" (click)="cancel()">Back</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="settingsFrm.invalid">Update</button>
+  </div>
+
+</form>
