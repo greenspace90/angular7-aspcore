@@ -99,10 +99,11 @@ export class LoginComponent implements OnInit {
                 data => {
                     // this.router.navigate([this.returnUrl]);
                     this.router.navigate(['cms']);
-                    this.dialogRef.close();
+                    this.dialogRef.close('success');
                 },
                 error => {
                     this.alertService.error(error);
+                    this.dialogRef.close('error');
                     this.loading = false;
                 });
     }
