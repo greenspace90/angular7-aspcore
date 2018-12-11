@@ -9,9 +9,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LoginComponent } from '@app/components/login';
 
 
-@Component({ 
+@Component({
     templateUrl: 'register.component.html',
-    styleUrls: ['./register.component.css'] })
+    styleUrls: ['./register.component.css']
+})
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
@@ -91,7 +92,7 @@ export class RegisterComponent implements OnInit {
 
     login(): void {
         const dialogRef = this.dialog.open(LoginComponent, {
-          width: '300px'
+            width: '300px'
         });
     }
 
