@@ -2,6 +2,11 @@
 
   <h2>{{data.modalTitle}}</h2>
 
+
+  <!-- <img [src]="imgURL" height="200" *ngIf="imgURL"> -->
+  <img src="../../../assets/IMG_2136.JPG" height="200">
+  <input formControlName="imagePath" #file type="file" accept='image/*' (change)="preview(file.files)" />
+
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Make</mat-label>
@@ -10,8 +15,6 @@
         {{ formErrors.make }}
       </mat-error>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="outline">
       <mat-label>Model</mat-label>
       <input matInput placeholder="Model..." formControlName="model">
@@ -28,8 +31,6 @@
         {{ formErrors.version }}
       </mat-error>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="outline">
       <mat-label>Registration</mat-label>
       <input matInput placeholder="Registration..." formControlName="registration">
@@ -50,8 +51,6 @@
         {{ formErrors.typeId }}
       </mat-error>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="outline">
       <mat-label>Purchase Date</mat-label>
       <input matInput [matDatepicker]="picker" placeholder="Choose a purchase date" formControlName="purchaseDate">
@@ -59,16 +58,6 @@
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="formErrors.purchaseDate">
         {{ formErrors.purchaseDate }}
-      </mat-error>
-    </mat-form-field>
-  </div>
-
-  <div>
-    <mat-form-field appearance="outline">
-      <mat-label>Purchase Price</mat-label>
-      <input matInput placeholder="Purchase Price..." formControlName="purchasePrice">
-      <mat-error *ngIf="formErrors.purchasePrice">
-        {{ formErrors.purchasePrice }}
       </mat-error>
     </mat-form-field>
   </div>
@@ -81,7 +70,15 @@
       </mat-error>
     </mat-form-field>
   </div>
+
   <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Purchase Price</mat-label>
+      <input matInput placeholder="Purchase Price..." formControlName="purchasePrice">
+      <mat-error *ngIf="formErrors.purchasePrice">
+        {{ formErrors.purchasePrice }}
+      </mat-error>
+    </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Residual Value</mat-label>
       <input matInput placeholder="Residual Value..." formControlName="residualValue">
