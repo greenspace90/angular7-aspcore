@@ -14,4 +14,5 @@ export interface IVehicle {
     ownershipPeriod: number;
     residualValue: number;
     currentValue: number;
+    imagePath: string;
 }

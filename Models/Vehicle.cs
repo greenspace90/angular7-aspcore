@@ -39,6 +39,7 @@ namespace angular7_aspcore.Models {
             get;
             set;
         }
+
         [ForeignKey ("typeId")]
         public Bodystyle bodystyle {
             get;
@@ -60,5 +61,10 @@ namespace angular7_aspcore.Models {
             get;
             set;
         }
+        public string imagePath {
+            get;
+            set;
+        }
+
     }
 }

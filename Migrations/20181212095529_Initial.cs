@@ -90,7 +90,8 @@ namespace angular7_aspcore.Migrations
                     purchaseDate = table.Column<DateTime>(nullable: false),
                     purchasePrice = table.Column<decimal>(nullable: false),
                     ownershipPeriod = table.Column<long>(nullable: false),
-                    residualValue = table.Column<decimal>(nullable: false)
+                    residualValue = table.Column<decimal>(nullable: false),
+                    imagePath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,15 +139,15 @@ namespace angular7_aspcore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "vehicleId", "contactId", "make", "model", "ownershipPeriod", "purchaseDate", "purchasePrice", "registration", "residualValue", "typeId", "version" },
+                columns: new[] { "vehicleId", "contactId", "imagePath", "make", "model", "ownershipPeriod", "purchaseDate", "purchasePrice", "registration", "residualValue", "typeId", "version" },
                 values: new object[,]
                 {
-                    { 1L, 1L, "Ford", "Focus", 5L, new DateTime(2015, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 20000m, "FG15BDA", 11000m, 2L, "1.0 EcoBoost" },
-                    { 2L, 2L, "Fiat", "500", 10L, new DateTime(2014, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15000m, "FG14BDE", 3000m, 2L, "Abarth" },
-                    { 5L, 2L, "Porsche", "Boxster", 7L, new DateTime(2010, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 46000m, "LP60AWE", 27000m, 4L, "S" },
-                    { 6L, 2L, "Mercedes-Benz", "SL", 9L, new DateTime(2012, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 68000m, "MB62DSA", 21000m, 5L, "500" },
-                    { 3L, 3L, "Mercedes-Benz", "C-Class", 4L, new DateTime(2017, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 28000m, "VG67BDA", 20000m, 1L, "180" },
-                    { 4L, 3L, "BMW", "X5", 6L, new DateTime(2015, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 55000m, "NH65LKU", 25000m, 3L, "5.0 M" }
+                    { 1L, 1L, null, "Ford", "Focus", 5L, new DateTime(2015, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 20000m, "FG15BDA", 11000m, 2L, "1.0 EcoBoost" },
+                    { 2L, 2L, null, "Fiat", "500", 10L, new DateTime(2014, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15000m, "FG14BDE", 3000m, 2L, "Abarth" },
+                    { 5L, 2L, null, "Porsche", "Boxster", 7L, new DateTime(2010, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 46000m, "LP60AWE", 27000m, 4L, "S" },
+                    { 6L, 2L, null, "Mercedes-Benz", "SL", 9L, new DateTime(2012, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 68000m, "MB62DSA", 21000m, 5L, "500" },
+                    { 3L, 3L, null, "Mercedes-Benz", "C-Class", 4L, new DateTime(2017, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 28000m, "VG67BDA", 20000m, 1L, "180" },
+                    { 4L, 3L, null, "BMW", "X5", 6L, new DateTime(2015, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 55000m, "NH65LKU", 25000m, 3L, "5.0 M" }
                 });
 
             migrationBuilder.CreateIndex(

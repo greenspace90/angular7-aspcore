@@ -10,7 +10,7 @@ using angular7_aspcore.Models;
 namespace angular7_aspcore.Migrations
 {
     [DbContext(typeof(ContactAppContext))]
-    [Migration("20181207123149_Initial")]
+    [Migration("20181212095529_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,6 +123,8 @@ namespace angular7_aspcore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long?>("contactId");
+
+                    b.Property<string>("imagePath");
 
                     b.Property<string>("make");
 

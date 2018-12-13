@@ -122,6 +122,8 @@ namespace angular7_aspcore.Migrations
 
                     b.Property<long?>("contactId");
 
+                    b.Property<string>("imagePath");
+
                     b.Property<string>("make");
 
                     b.Property<string>("model");

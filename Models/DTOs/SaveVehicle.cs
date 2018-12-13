@@ -45,5 +45,9 @@ namespace angular7_aspcore.Models.DTOs {
             get;
             set;
         }
+        public string imagePath {
+            get;
+            set;
+        }
     }
 }
