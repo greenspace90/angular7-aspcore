@@ -28,6 +28,7 @@ import { MatDatepickerModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, Ma
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ImageuploaderComponent } from './components/imageuploader';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     BodystylesComponent,
     DeleteconfirmComponent,
     DepreciationchartComponent,
-    SettingsComponent
+    SettingsComponent,
+    ImageuploaderComponent
   ],
   imports: [
     BrowserModule,
@@ -56,8 +58,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
     MatMomentDateModule,
     MatDialogModule,
     MatTableModule,
-    // MatColorPickerModule,
-    // MccColorPickerModule,
     ColorPickerModule,
     LayoutModule,
     Routing

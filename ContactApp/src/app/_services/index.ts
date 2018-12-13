@@ -5,3 +5,4 @@ export * from './contact.service';
 export * from './user.service';
 export * from './vehicle.service';
 export * from './settings.service';
+export * from './upload.service';
