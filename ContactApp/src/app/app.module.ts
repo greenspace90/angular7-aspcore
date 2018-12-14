@@ -29,6 +29,7 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-
 import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ImageuploaderComponent } from './components/imageuploader';
+import { FileValidator, FileValueAccessor } from '@app/shared';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { ImageuploaderComponent } from './components/imageuploader';
     DeleteconfirmComponent,
     DepreciationchartComponent,
     SettingsComponent,
-    ImageuploaderComponent
+    ImageuploaderComponent,
+    FileValidator,
+    FileValueAccessor
   ],
   imports: [
     BrowserModule,
