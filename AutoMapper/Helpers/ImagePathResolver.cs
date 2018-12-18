@@ -18,7 +18,7 @@ namespace angular7_aspcore.AutoMapper.Helpers {
 
         public string Resolve (Models.Vehicle source, DTO.VehicleDTO destination, string destmember, ResolutionContext context) {
             // string FullPath = $"{_hostingEnvironment.ContentRootPath}/ContactApp/src/assets/{source.imagePath}";
-            string FullPath = $"../../../assets/{source.imagePath}";
+            string FullPath = $"../../../assets/{source.make}/{source.imagePath}";
             return FullPath;
         }
     }
