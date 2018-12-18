@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
-import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEventType, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { VehiclelistComponent } from '@components/vehiclelist';
 import { VehicleService, BodystyleService } from '@app/_services/';
-import { DBOperation } from '@app/shared/DBOperation';
+import { DBOperation, FileValidator, FileValueAccessor } from '@app/shared';
 import { IVehicle } from '@app/_models/';
 
 @Component({
@@ -59,7 +59,10 @@ export class VehicleformComponent implements OnInit {
       ownershipPeriod: ['', [Validators.required]],
       residualValue: ['', [(control: AbstractControl) => residualValueValidator(this.currentPurchasePrice)(control)]],
       currentValue: [''],
-      imagePath: ['']
+      imagePath: [''],
+      // fullImagePath: ['']
+      fullImagePath: ['', [FileValidator.validate]]
+
     });
 
     this._bodystyleService.getAllBodystyles('api/bodystyle/getAllBodystyles')
@@ -75,6 +78,7 @@ export class VehicleformComponent implements OnInit {
       this.vehicleFrm.reset();
     } else {
       this.vehicleFrm.setValue(this.data.vehicle);
+      this.imgURL = this.data.vehicle.fullImagePath;
     }
     this.SetControlsState(this.data.dbops === DBOperation.delete ? false : true);
   }
@@ -249,14 +253,22 @@ export class VehicleformComponent implements OnInit {
 
     const formData = new FormData();
 
-    for (let file of this.imagePath)
-      formData.append(file.name, file);
-      const url = `$api/upload?make=${make}`; // DELETE api/contact?id=42    
+    for (let file of this.imagePath) {
+      formData.append('Files', file);
+    }
 
-      //  this.uploadReq = this._uploadService.upload('api/upload', formData);
-    // const uploadReq = new HttpRequest('POST', `api/upload`, formData, {
-    const uploadReq = new HttpRequest('POST', url, formData, {
-      reportProgress: true,
+    const value = { 'key': this.data.vehicle.make };
+    formData.append('makeDTO', JSON.stringify(value));
+    // console.log(formData.get('makeDTO'));
+    // console.log(formData.get('Files'));
+    // const url = `api/upload?make=${make}`;   
+
+    //  this.uploadReq = this._uploadService.upload('api/upload', formData);
+    var headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    const uploadReq = new HttpRequest('POST', `api/upload`, formData, {
+      headers: headers,
+      reportProgress: true
     });
 
     this.http.request(uploadReq).subscribe(event => {
@@ -266,8 +278,6 @@ export class VehicleformComponent implements OnInit {
         this.message = event.body.toString();
     });
   }
-
-
 }
 
 function purchasePriceValidator(residualValue: number): ValidatorFn {
