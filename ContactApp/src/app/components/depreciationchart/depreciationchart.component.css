@@ -1,3 +1,7 @@
+::ng-deep :root {
+    --background-color: #ffffff00;
+  }
+
 ::ng-deep .custom-settings .mat-dialog-container {
-    background-color: rgb(169, 247, 208);
+    background-color: var(--background-color);
 }

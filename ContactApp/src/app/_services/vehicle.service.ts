@@ -1,25 +1,8 @@
-import {  
-  Injectable  
-} from '@angular/core';  
-import {  
-  HttpClient,
-  HttpResponse,  
-  HttpParams,  
-  HttpErrorResponse  
-} from '@angular/common/http';  
-import {  
-  HttpHeaders  
-} from '@angular/common/http';  
-import {  
-  Observable,  
-  throwError  
-} from 'rxjs';  
-import {  
-  catchError  
-} from 'rxjs/operators';  
-import {  
-  IDataPoint, ISaveVehicle, IVehicle 
-} from '../_models'; 
+import { Injectable } from '@angular/core';  
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';  
+import { Observable, throwError } from 'rxjs';  
+import { catchError } from 'rxjs/operators';  
+import { IDataPoint, ISaveVehicle, IVehicle } from '../_models'; 
 import { async } from '@angular/core/testing';
  
 const httpOptions = {  

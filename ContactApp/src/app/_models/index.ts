@@ -4,3 +4,4 @@ export * from './savevehicle';
 export * from './user';
 export * from './vehicle';
 export * from './datapoint';
+export * from './settings';

@@ -33,5 +33,7 @@ namespace angular7_aspcore.Models.DTOs {
             }
             return bookValue;
         }
+
+        public string fullImagePath {get;set;}
     }
 }

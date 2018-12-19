@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AppMaterialModule } from './modules/app.material.module';
+import {MatTableModule} from '@angular/material/table';
+// import { MatColorPickerModule } from 'mat-color-picker/index';
+// import { MccColorPickerModule } from 'material-community-components';
 import { ContactformComponent } from './components/contactform';
 import { ContactlistComponent } from './components/contactlist';
 import { VehiclelistComponent } from './components/vehiclelist';
@@ -17,12 +20,16 @@ import { RegisterComponent } from './components/register';
 import { BodystylesComponent } from './components/bodystyles';
 import { DeleteconfirmComponent } from './components/deleteconfirm';
 import { DepreciationchartComponent } from './components/depreciationchart';
+import { SettingsComponent } from './components/settings';
 import { AlertComponent } from './_components';
-import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService } from './_services/';
+import { ContactService, VehicleService, BodystyleService, AuthenticationService, UserService, AlertService, SettingsService } from './_services/';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatDialogModule } from '@angular/material';
+import { MatDatepickerModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatDialogModule } from '@angular/material';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { ImageuploaderComponent } from './components/imageuploader';
+import { FileValidator, FileValueAccessor } from '@app/shared';
 
 @NgModule({
   declarations: [
@@ -37,7 +44,11 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     RegisterComponent,
     BodystylesComponent,
     DeleteconfirmComponent,
-    DepreciationchartComponent
+    DepreciationchartComponent,
+    SettingsComponent,
+    ImageuploaderComponent,
+    FileValidator,
+    FileValueAccessor
   ],
   imports: [
     BrowserModule,
@@ -49,6 +60,8 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     MatDatepickerModule, // provides moment date adapter
     MatMomentDateModule,
     MatDialogModule,
+    MatTableModule,
+    ColorPickerModule,
     LayoutModule,
     Routing
   ],
@@ -59,6 +72,7 @@ import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
     AuthenticationService,
     UserService,
     AlertService,
+    SettingsService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },

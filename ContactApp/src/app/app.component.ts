@@ -14,18 +14,29 @@ import { LoginComponent } from '@app/components/login';
 })
 export class AppComponent implements OnInit {
   title = 'ContactApp';
+  loggedIn = false;
+  buttonText = 'Login';
 
   constructor(
-    private http:HttpClient, 
+    private http: HttpClient,
     private dialog: MatDialog,
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
-    private router: Router){ }
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.http.get('/api/contact').subscribe(data=> {
+    this.http.get('/api/contact').subscribe(data => {
       console.log(data);
     });
+  }
+
+  buttonClick() {
+    if (this.loggedIn) {
+      this.logOut();
+    }
+    else {
+      this.login();
+    }
   }
 
   login(): void {
@@ -33,26 +44,22 @@ export class AppComponent implements OnInit {
       width: '300px'
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.loadingState = true;
-    //   this.loadContacts();
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result === 'success') {
+        this.loggedIn = true;
+        this.buttonText = 'Log Out';
+      } else if (result === 'error') {
+      } else {
+        // this.showMessage('Please try again, something went wrong');
+      }
+    });
   };
 
   logOut() {
     this.authenticationService.logout();
+    this.loggedIn = false;
+    this.buttonText = 'Login';
     this.router.navigate(['']);
   }
-
-// export class AppComponent implements OnInit {
-//   title = 'ContactApp';
-//   constructor(private http:HttpClient, private service: ContactService){
-//   }
-//   ngOnInit(): void {
-//     this.service.getAllContacts(Global.BASE_USER_ENDPOINT + 'getAllContacts')
-//     .subscribe((data: Contact) => this.config = {
-//       heroesUrl: data['heroesUrl'],
-//       textfile:  data['textfile']
-//     });
-//   }
 }
