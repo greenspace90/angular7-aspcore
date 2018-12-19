@@ -37,9 +37,10 @@ export class VehicleformComponent implements OnInit {
     private http: HttpClient) { }
 
   ngOnInit() {
-
-    this.currentPurchasePrice = this.data.vehicle.purchasePrice;
-    this.currentResidualValue = this.data.vehicle.residualValue;
+    if (this.data.dbops != DBOperation.create) {
+      this.currentPurchasePrice = this.data.vehicle.purchasePrice;
+      this.currentResidualValue = this.data.vehicle.residualValue;
+    }
 
     // Build vehicle form
     // The lines including lambda expressions force the re-evaluation of method parameters whenever they change,
@@ -62,7 +63,6 @@ export class VehicleformComponent implements OnInit {
       imagePath: [''],
       // fullImagePath: ['']
       fullImagePath: ['', [FileValidator.validate]]
-
     });
 
     this._bodystyleService.getAllBodystyles('api/bodystyle/getAllBodystyles')
@@ -76,6 +76,8 @@ export class VehicleformComponent implements OnInit {
 
     if (this.data.dbops === DBOperation.create) {
       this.vehicleFrm.reset();
+      // Prevents form control error when creating a vehicle- full image path not yet known, but some value must be set on formgroup
+      this.vehicleFrm.controls['fullImagePath'].setValue('not set');
     } else {
       this.vehicleFrm.setValue(this.data.vehicle);
       this.imgURL = this.data.vehicle.fullImagePath;
@@ -86,6 +88,7 @@ export class VehicleformComponent implements OnInit {
   // form value change event
   onValueChanged(data?: any) {
     if (!this.vehicleFrm) { return; }
+
     this.currentPurchasePrice = this.vehicleFrm.get('purchasePrice').value;
     this.currentResidualValue = this.vehicleFrm.get('residualValue').value;
     const form = this.vehicleFrm;
@@ -104,6 +107,8 @@ export class VehicleformComponent implements OnInit {
       }
     }
   }
+
+
 
   // form errors model
   // tslint:disable-next-line:member-ordering
@@ -257,7 +262,7 @@ export class VehicleformComponent implements OnInit {
       formData.append('Files', file);
     }
 
-    const value = { 'key': this.data.vehicle.make };
+    const value = { 'key': make };
     formData.append('makeDTO', JSON.stringify(value));
     // console.log(formData.get('makeDTO'));
     // console.log(formData.get('Files'));
